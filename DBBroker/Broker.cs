@@ -11,8 +11,7 @@ namespace DBBroker
 
         public Broker()
         {
-            konekcija = new SqlConnection(@"Data source=(localdb)\MSSQLLocalDB;Initial Catalog=D1-
-                                           Prosoft;Integrated Security=True;");
+            konekcija = new SqlConnection(@"Data source=(localdb)\MSSQLLocalDB;Initial Catalog=PansionDB;Integrated Security=True;");
         }
 
         public SqlCommand NapraviKomandu()

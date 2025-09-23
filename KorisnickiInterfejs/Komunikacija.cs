@@ -1,0 +1,82 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
+using Zajednicki;
+
+namespace KorisnickiInterfejs
+{
+    //na foru klijenta
+    //samo prima i salje poruke
+    public class Komunikacija
+    {
+        private static Komunikacija instance;
+        private Socket socket;
+        private Komunikacija() { }
+        public static Komunikacija Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new Komunikacija();
+                }
+                return instance;
+            }
+        }
+
+        //public void Connect()
+        //{
+        //    socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+        //    socket.Connect("127.0.0.1", 9000);
+        //    helper = new KomunikacioniHelper(socket);
+        //}
+
+        //public T PosaljiZahtev<T>(Zahtev zahtev) where T : class
+        //{
+        //    helper.Posalji(zahtev);
+        //    Odgovor odgovor = helper.Primi<Odgovor>();
+        //    if (odgovor.Signal)
+        //    {
+        //        return (T)odgovor.ResponseObject;
+        //    } else
+        //    {
+        //        throw new Exception(odgovor.Poruka);
+        //    }
+        //}
+
+        //public T PosaljiZahtev<T>(Operacija operacija, object objekat = null) where T : class
+        //{
+        //    Zahtev zahtev = new Zahtev(operacija, objekat);
+        //    helper.Posalji(zahtev);
+        //    Odgovor odgovor = helper.Primi<Odgovor>();
+        //    if (odgovor.Signal)
+        //    {
+        //        return (T)odgovor.Objekat;
+        //    } else
+        //    {
+        //        throw new Exception(odgovor.Poruka);
+        //    }
+        //}
+
+        //public void ZatvoriKonekciju()
+        //{
+        //    try
+        //    {
+        //        Zahtev zahtev = new Zahtev() { Operacija = Operacija.KrakKomunikacije};
+        //        helper.Posalji(zahtev);
+        //        socket.Shutdown(SocketShutdown.Both);
+        //        socket.Dispose();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Debug.WriteLine(ex.Message);
+        //        throw;
+        //        throw;
+        //    }
+        //}
+    }
+}

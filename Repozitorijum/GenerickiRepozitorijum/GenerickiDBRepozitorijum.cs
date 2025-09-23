@@ -41,6 +41,11 @@ namespace Repozitorijum.GenerickiRepozitorijum
             return rez;
         }
 
+        public void Login(string username, string password)
+        {
+
+        }
+
         public List<IDomenObjekat> Pretrazi(string kriterijum)
         {
             throw new NotImplementedException();
