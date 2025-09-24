@@ -15,5 +15,11 @@ namespace AplikacionaLogika
             so.IzvrsiTemplejt();
             return so.Rez;
         }
+
+        public void OdjaviSve()
+        {
+            var so = new OdjaviSveRadnikeSO();
+            so.IzvrsiTemplejt();
+        }
     }
 }

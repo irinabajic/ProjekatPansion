@@ -52,9 +52,9 @@ namespace Zajednicki
         // Korisno kad u Response.Data dobiješ JsonElement:
         public static T ReadType<T>(object o)
         {
-            if (o is JsonElement je) return JsonSerializer.Deserialize<T>(je.GetRawText())!;
-            return JsonSerializer.Deserialize<T>(JsonSerializer.Serialize(o))!;
+            if (o is JsonElement je)
+                return je.Deserialize<T>(new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            return (T)o;
         }
     }
-
 }

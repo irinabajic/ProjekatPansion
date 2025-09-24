@@ -1,4 +1,5 @@
-﻿using Domen;
+﻿using AplikacionaLogika;
+using Domen;
 using System.ComponentModel;
 
 namespace Server
@@ -24,6 +25,9 @@ namespace Server
             server = new Server();
             server.Pokreni();
 
+            // reset baze: niko nije prijavljen
+            try { Kontroler.Instance.OdjaviSve(); } catch { }
+
             kraj = false;
 
             nitAccept = new Thread(server.Accept) { IsBackground = true };
@@ -33,6 +37,7 @@ namespace Server
             btnZaustavi.Enabled = true;
 
             tmr.Start();                          // kreni sa osvežavanjem prijavljenih
+            
             OsveziDgv();                          // odmah prvo punjenje
         }
 
@@ -41,13 +46,15 @@ namespace Server
             kraj = true;
             try { tmr.Stop(); } catch { }
 
+            // po gašenju – odjavi sve u bazi
+            try { Kontroler.Instance.OdjaviSve(); } catch { }
+            OsveziDgv();
+
             try { server?.Stop(); } catch { }
             try { nitAccept?.Join(1000); } catch { }
 
             btnPokreni.Enabled = true;
             btnZaustavi.Enabled = false;
-
-            // opciono: očisti grid
             dgvRadnici.DataSource = null;
         }
 

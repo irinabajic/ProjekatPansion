@@ -65,34 +65,22 @@ namespace KorisnickiInterfejs
             if (helper == null) throw new InvalidOperationException("Pozovi Connect() pre slanja.");
             helper.Posalji(zahtev);
             Odgovor odgovor = helper.Primi<Odgovor>();
-            if (odgovor.Signal)
-            {
-                return (T)odgovor.Objekat;
-            }
-            else
-            {
-                throw new Exception(odgovor.Poruka);
-            }
+            if (!odgovor.Signal) throw new Exception(odgovor.Poruka);
+
+            // KLJUČNA LINIJA:
+            return KomunikacijaHelper.ReadType<T>(odgovor.Objekat);
         }
 
         public T PosaljiZahtev<T>(Operacija operacija, object objekat = null) where T : class
         {
             if (helper == null) throw new InvalidOperationException("Pozovi Connect() pre slanja.");
-            Zahtev zahtev = new Zahtev()
-            {
-                Operacija = operacija,
-                Objekat = objekat
-            };
+            var zahtev = new Zahtev { Operacija = operacija, Objekat = objekat };
             helper.Posalji(zahtev);
             Odgovor odgovor = helper.Primi<Odgovor>();
-            if (odgovor.Signal)
-            {
-                return (T)odgovor.Objekat;
-            }
-            else
-            {
-                throw new Exception(odgovor.Poruka);
-            }
+            if (!odgovor.Signal) throw new Exception(odgovor.Poruka);
+
+            // KLJUČNA LINIJA:
+            return KomunikacijaHelper.ReadType<T>(odgovor.Objekat);
         }
 
         public void ZatvoriKonekciju()
