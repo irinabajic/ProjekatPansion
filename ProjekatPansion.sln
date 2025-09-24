@@ -3,23 +3,23 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csproj", "{96EAE3B3-6A02-42C6-A369-7C74EFB1B8B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server", "Server\Server.csproj", "{96EAE3B3-6A02-42C6-A369-7C74EFB1B8B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SistemskeOperacije", "SistemskeOperacije\SistemskeOperacije.csproj", "{05481881-A2A0-4D24-9425-67EC66269BDC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SistemskeOperacije", "SistemskeOperacije\SistemskeOperacije.csproj", "{05481881-A2A0-4D24-9425-67EC66269BDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repozitorijum", "Repozitorijum\Repozitorijum.csproj", "{4C61CC7B-F2CB-4429-8391-3DB4B060B028}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repozitorijum", "Repozitorijum\Repozitorijum.csproj", "{4C61CC7B-F2CB-4429-8391-3DB4B060B028}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KorisnickiInterfejs", "KorisnickiInterfejs\KorisnickiInterfejs.csproj", "{BC135362-C9B3-486D-A175-10526C925393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KorisnickiInterfejs", "KorisnickiInterfejs\KorisnickiInterfejs.csproj", "{BC135362-C9B3-486D-A175-10526C925393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domen", "Domen\Domen.csproj", "{4F459F70-BD65-4E8C-872E-353F555CC247}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domen", "Domen\Domen.csproj", "{4F459F70-BD65-4E8C-872E-353F555CC247}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBBroker", "DBBroker\DBBroker.csproj", "{5A224381-FCE1-4F8A-BA1C-4AA15378C5FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBBroker", "DBBroker\DBBroker.csproj", "{5A224381-FCE1-4F8A-BA1C-4AA15378C5FE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Zajednicki", "Zajednicki\Zajednicki.csproj", "{FFCE8A3E-097C-4CCE-8365-EB473FB33ED6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zajednicki", "Zajednicki\Zajednicki.csproj", "{FFCE8A3E-097C-4CCE-8365-EB473FB33ED6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AplikacionaLogika", "AplikacionaLogika\AplikacionaLogika.csproj", "{EBF4BEB6-EF6F-4404-933D-79798B77096A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AplikacionaLogika", "AplikacionaLogika\AplikacionaLogika.csproj", "{EBF4BEB6-EF6F-4404-933D-79798B77096A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleAppDatabase", "ConsoleAppDatabase\ConsoleAppDatabase.csproj", "{62E9539D-7F52-403B-B786-72AEFCD9540D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppDatabase", "ConsoleAppDatabase\ConsoleAppDatabase.csproj", "{62E9539D-7F52-403B-B786-72AEFCD9540D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E6C748C4-764E-464A-85AC-7774C77FE1AC}"
 	ProjectSection(SolutionItems) = preProject

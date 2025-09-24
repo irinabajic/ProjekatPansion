@@ -30,41 +30,70 @@
         {
             btnPokreni = new Button();
             btnZaustavi = new Button();
+            dgvRadnici = new DataGridView();
+            lblRadnici = new Label();
+            ((System.ComponentModel.ISupportInitialize)dgvRadnici).BeginInit();
             SuspendLayout();
             // 
             // btnPokreni
             // 
-            btnPokreni.Location = new Point(119, 77);
+            btnPokreni.Location = new Point(119, 240);
             btnPokreni.Name = "btnPokreni";
             btnPokreni.Size = new Size(139, 41);
             btnPokreni.TabIndex = 0;
             btnPokreni.Text = "Pokreni";
             btnPokreni.UseVisualStyleBackColor = true;
+            btnPokreni.Click += btnPokreni_Click;
             // 
             // btnZaustavi
             // 
-            btnZaustavi.Location = new Point(301, 77);
+            btnZaustavi.Location = new Point(295, 240);
             btnZaustavi.Name = "btnZaustavi";
             btnZaustavi.Size = new Size(139, 41);
             btnZaustavi.TabIndex = 1;
             btnZaustavi.Text = "Zaustavi";
             btnZaustavi.UseVisualStyleBackColor = true;
+            btnZaustavi.Click += btnZaustavi_Click;
+            // 
+            // dgvRadnici
+            // 
+            dgvRadnici.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRadnici.Location = new Point(119, 55);
+            dgvRadnici.Name = "dgvRadnici";
+            dgvRadnici.Size = new Size(315, 157);
+            dgvRadnici.TabIndex = 2;
+            // 
+            // lblRadnici
+            // 
+            lblRadnici.AutoSize = true;
+            lblRadnici.Location = new Point(117, 31);
+            lblRadnici.Name = "lblRadnici";
+            lblRadnici.Size = new Size(100, 15);
+            lblRadnici.TabIndex = 3;
+            lblRadnici.Text = "Prijavljeni radnici:";
             // 
             // FrmServer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(575, 224);
+            ClientSize = new Size(575, 359);
+            Controls.Add(lblRadnici);
+            Controls.Add(dgvRadnici);
             Controls.Add(btnZaustavi);
             Controls.Add(btnPokreni);
             Name = "FrmServer";
             Text = "FrmServer";
+            Load += FrmServer_Load;
+            ((System.ComponentModel.ISupportInitialize)dgvRadnici).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private Button btnPokreni;
         private Button btnZaustavi;
+        private DataGridView dgvRadnici;
+        private Label lblRadnici;
     }
 }

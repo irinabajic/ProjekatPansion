@@ -32,11 +32,11 @@ namespace KorisnickiInterfejs.GUIKontroler
 
             try
             {
-                //Komunikacija.Instance.Connect();
-                //radnik = Komunikacija.Instance.PosaljiZahtev<Radnik>(Operacija.Login, radnik);
-                //Session.Session.Instance.PrijavljeniRadnik = radnik;
-                //MessageBox.Show($"Welcome, {radnik.Ime}!");
-                //login.DialogResult = DialogResult.OK;
+                Komunikacija.Instance.PoveziSe();
+                radnik = Komunikacija.Instance.PosaljiZahtev<Radnik>(Operacija.Login, radnik);
+                Session.Session.Instance.PrijavljeniRadnik = radnik;
+                MessageBox.Show($"Welcome, {radnik.Ime}!");
+                login.DialogResult = DialogResult.OK;
             }
             catch (Exception ex)
             {
