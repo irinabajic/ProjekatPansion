@@ -5,6 +5,7 @@
         KreirajMacka,
         Login,
         KrajKomunikacije,
-        VratiSviPrijavljenRadnik
+        VratiSviPrijavljenRadnik,
+        VratiSveRadnike
     }
 }

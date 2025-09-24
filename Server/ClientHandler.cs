@@ -44,6 +44,13 @@ namespace Server
                                 break;
                             }
 
+                        case Operacija.VratiSveRadnike:
+                            {
+                                var lista = AplikacionaLogika.Kontroler.Instance.VratiSveRadnike();
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+
                         case Operacija.KrajKomunikacije:
                             helper.Posalji(new Odgovor { Signal = true, Poruka = "Kraj" });
                             radi = false;

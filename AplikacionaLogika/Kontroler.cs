@@ -16,6 +16,13 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
+        public List<Radnik> VratiSveRadnike()
+        {
+            var so = new VratiSveRadnikeSO();
+            so.IzvrsiTemplejt();
+            return so.Rez;
+        }
+
         public void OdjaviSve()
         {
             var so = new OdjaviSveRadnikeSO();
