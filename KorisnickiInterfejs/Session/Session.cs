@@ -27,6 +27,21 @@ namespace KorisnickiInterfejs.Session
         }
         public Radnik PrijavljeniRadnik { get; set; }
 
+        public bool JePrijavljen => PrijavljeniRadnik != null;
+
+        // Postavi posle uspešnog logina (očisti lozinku u memoriji)
+        public void SetRadnik(Radnik r)
+        {
+            if (r != null) r.Password = "";
+            PrijavljeniRadnik = r;
+        }
+
+        // Pozovi na logout / gašenje aplikacije
+        public void Odjavi()
+        {
+            PrijavljeniRadnik = null;
+        }
+
         //public Macka TrenutnaMacka { get; set; }
         //npr ako hocu da je prikazem na drugoj formi
         //uzmem je direktno iz sesije

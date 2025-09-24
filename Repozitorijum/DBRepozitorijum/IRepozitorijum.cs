@@ -19,9 +19,9 @@ namespace Repozitorijum.DBRepozitorijum
         //select * from nazivTabele joinUslov uslov
         void Dodaj(T t);
         List<T> VratiSvi(T t);
-        List<T> Pretrazi(string kriterijum);
+        List<T> Pretrazi(T t, string kriterijum);
         void Obrisi(T t);
-        void Izmeni(T t);
+        int Izmeni(T t, string setClause, string whereClause);
 
         void OtvoriKonekciju();
         void ZatvoriKonekciju();

@@ -38,6 +38,7 @@ namespace Repozitorijum.GenerickiRepozitorijum
             {
                 rez.Add(obj.ReadRow(reader));
             }
+            reader.Close();
             return rez;
         }
 
@@ -46,16 +47,29 @@ namespace Repozitorijum.GenerickiRepozitorijum
 
         }
 
-        public List<IDomenObjekat> Pretrazi(string kriterijum)
+        public List<IDomenObjekat> Pretrazi(IDomenObjekat obj, string kriterijum)
         {
-            throw new NotImplementedException();
+            List<IDomenObjekat> rez = new List<IDomenObjekat>();
+            SqlCommand komanda = broker.NapraviKomandu();
+            komanda.CommandText = string.IsNullOrWhiteSpace(kriterijum)
+                ? $"SELECT * FROM {obj.NazivTabele}"
+                : $"SELECT * FROM {obj.NazivTabele} WHERE {kriterijum}";
+
+            SqlDataReader reader = komanda.ExecuteReader();
+            while (reader.Read())
+            {
+                rez.Add(obj.ReadRow(reader));
+            }
+            reader.Close();
+            return rez;
         }
 
-        public void Izmeni(IDomenObjekat obj)
+        public int Izmeni(IDomenObjekat t, string setClause, string whereClause)
         {
-            throw new NotImplementedException();
+            SqlCommand komanda = broker.NapraviKomandu();
+            komanda.CommandText = $"UPDATE {t.NazivTabele} SET {setClause} WHERE {whereClause}";
+            return komanda.ExecuteNonQuery();
         }
-
         public void OtvoriKonekciju()
         {
             broker.OtvoriKonekciju();
@@ -80,5 +94,6 @@ namespace Repozitorijum.GenerickiRepozitorijum
         {
             broker.Rollback();
         }
+
     }
 }

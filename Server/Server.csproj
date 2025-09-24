@@ -13,7 +13,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AplikacionaLogika\AplikacionaLogika.csproj" />
+    <ProjectReference Include="..\DBBroker\DBBroker.csproj" />
     <ProjectReference Include="..\Domen\Domen.csproj" />
+    <ProjectReference Include="..\KorisnickiInterfejs\KorisnickiInterfejs.csproj" />
     <ProjectReference Include="..\Zajednicki\Zajednicki.csproj" />
   </ItemGroup>
 

@@ -4,6 +4,7 @@
     {
         KreirajMacka,
         Login,
-        KrajKomunikacije
+        KrajKomunikacije,
+        VratiSviPrijavljenRadnik
     }
 }

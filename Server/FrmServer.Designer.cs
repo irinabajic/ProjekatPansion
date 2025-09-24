@@ -37,7 +37,7 @@
             // 
             // btnPokreni
             // 
-            btnPokreni.Location = new Point(119, 240);
+            btnPokreni.Location = new Point(118, 255);
             btnPokreni.Name = "btnPokreni";
             btnPokreni.Size = new Size(139, 41);
             btnPokreni.TabIndex = 0;
@@ -47,7 +47,7 @@
             // 
             // btnZaustavi
             // 
-            btnZaustavi.Location = new Point(295, 240);
+            btnZaustavi.Location = new Point(317, 255);
             btnZaustavi.Name = "btnZaustavi";
             btnZaustavi.Size = new Size(139, 41);
             btnZaustavi.TabIndex = 1;
@@ -58,15 +58,15 @@
             // dgvRadnici
             // 
             dgvRadnici.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRadnici.Location = new Point(119, 55);
+            dgvRadnici.Location = new Point(28, 55);
             dgvRadnici.Name = "dgvRadnici";
-            dgvRadnici.Size = new Size(315, 157);
+            dgvRadnici.Size = new Size(517, 171);
             dgvRadnici.TabIndex = 2;
             // 
             // lblRadnici
             // 
             lblRadnici.AutoSize = true;
-            lblRadnici.Location = new Point(117, 31);
+            lblRadnici.Location = new Point(25, 28);
             lblRadnici.Name = "lblRadnici";
             lblRadnici.Size = new Size(100, 15);
             lblRadnici.TabIndex = 3;

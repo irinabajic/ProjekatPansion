@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using System.ComponentModel;
 
 namespace Domen
 {
@@ -9,11 +10,13 @@ namespace Domen
         public string Username { get; set; } = "";
         public string Password { get; set; } = "";
         public string Ime { get; set; } = "";
-        public int BrojTelefona { get; set; }
+        public string BrojTelefona { get; set; } = "";
+        public bool Prijavljen { get; set; }
 
+        [Browsable(false)]
         public string NazivTabele => "Radnik";
-
-        public string UbaciVrednosti => $"{IdRadnik},'{Username}','{Password}','{Ime}',{BrojTelefona}";
+        [Browsable(false)]
+        public string UbaciVrednosti => $"{IdRadnik},'{Ime}','{BrojTelefona}','{Username}','{Password}',{Prijavljen}";
 
         public IDomenObjekat ReadRow(SqlDataReader reader)
         {
@@ -21,7 +24,10 @@ namespace Domen
             {
                 IdRadnik = (int)reader["idRadnik"],
                 Ime = reader["ime"] as string ?? "",
-                BrojTelefona = (int)reader["brojTelefona"]
+                BrojTelefona = reader["brojTelefona"] as string ?? "",
+                Username = reader["username"] as string ?? "",
+                Password = reader["password"] as string ?? "",
+                Prijavljen = reader["prijavljen"] != DBNull.Value && (bool)reader["prijavljen"]
             };
         }
     }

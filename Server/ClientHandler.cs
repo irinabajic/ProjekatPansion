@@ -1,4 +1,6 @@
-﻿using Domen;
+﻿using AplikacionaLogika;
+using Domen;
+using KorisnickiInterfejs.Session;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -14,8 +16,8 @@ namespace Server
     {
         private Socket socket;
         private KomunikacijaHelper helper;
-        public event EventHandler OdjavljeniKlijent;
         List<ClientHandler> klijenti = new List<ClientHandler>();
+        private volatile bool radi = true;
 
         public ClientHandler(Socket socket, List<ClientHandler> klijenti)
         {
@@ -26,54 +28,69 @@ namespace Server
 
         public void HandleRequest()
         {
-            //try
-            //{
-            //    Zahtev zahtev;
-            //    while ((zahtev != helper.Primi<Zahtev>()).Operacija != OperationCanceledException.KrajKomunikacije)
-            //    {
-            //        Odgovor odgovor;
-            //        try
-            //        {
-            //            odgovor = KreirajOdgovor(zahtev);
-            //        }
-            //        catch (Exception ex)
-            //        {
-            //            odgovor = new Odgovor();
-            //            odgovor.Poruka = ex.Message;
-            //            odgovor.Signal = false;
-            //        }
-            //        helper.Posalji(odgovor);
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Debug.WriteLine(">>>" + ex.Message);
+            try
+            {
+                while (true)
+                {
+                    Zahtev req = helper.Primi<Zahtev>();
+                    switch (req.Operacija)
+                    {
+                        case Operacija.Login:
+                            {
+                                // telo dolazi kao Radnik 
+                                var ulaz = KomunikacijaHelper.ReadType<Radnik>(req.Objekat);
+                                var r = AplikacionaLogika.Kontroler.Instance.Login(ulaz.Username, ulaz.Password);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = r });
+                                break;
+                            }
+
+                        case Operacija.KrajKomunikacije:
+                            helper.Posalji(new Odgovor { Signal = true, Poruka = "Kraj" });
+                            radi = false;
+                            return;
+
+                        default:
+                            helper.Posalji(new Odgovor { Signal = false, Poruka = "Nepoznata operacija." });
+                            break;
+                    }
+                }
+            } 
+            catch (Exception ex)
+            {
+                Debug.WriteLine("[SERVER] CH error: " + ex.Message);
             }
-            //finally
-            //{
-            //    Stop();
-            //    OdjavljeniKlijent?.Invoke(this, EventArgs.Empty);   
-            //}
+            finally
+            {
+                Close();
+            }
         }
 
+        public void Close()
+        {
+            try { helper?.Dispose(); } catch { }
+            try { socket?.Shutdown(SocketShutdown.Both); } catch { }
+            try { socket?.Dispose(); } catch { }
+            klijenti.Remove(this);
+        }
+        public void Stop()
+        {
+            radi = false; // prekini while u HandleRequest
 
-        //public void Stop()
-        //{
-        //    if (socket != null)
-        //    {
-        //        socket.Shutdown(SocketShutdown.Both);
-        //        socket.Dispose();
-        //        socket = null;
-        //    }
-        //}
+            // skini prijavljenog iz serverske sesije (ako koristiš sesiju na serveru)
+            try { Session.Instance.Odjavi(); } catch { }
 
-        //public void Close()
-        //{
-        //    try { helper?.Dispose(); } catch { }
-        //    try { socket?.Shutdown(SocketShutdown.Both); } catch { }
-        //    try { socket?.Dispose(); } catch { }
-        //    klijenti.Remove(this);
-        //}
+            // opcionalno obavesti klijenta da se veza gasi
+            try { helper?.Posalji(new Odgovor { Signal = true, Poruka = "Kraj" }); } catch { }
+
+            // zatvori mrežu
+            try { helper?.Dispose(); } catch { }
+            try { socket?.Shutdown(SocketShutdown.Both); } catch { }
+            try { socket?.Dispose(); } catch { }
+
+            // ukloni handler iz liste
+            klijenti.Remove(this);
+        }
+
 
         //private Odgovor KreirajOdgovor(Zahtev zahtev)
         //{
@@ -86,7 +103,6 @@ namespace Server
         //            break;
         //    }
         //}
-
-
     }
+}
 
