@@ -16,7 +16,11 @@ namespace Domen
         [Browsable(false)]
         public string NazivTabele => "Radnik";
         [Browsable(false)]
-        public string UbaciVrednosti => $"{IdRadnik},'{Ime}','{BrojTelefona}','{Username}','{Password}',{Prijavljen}";
+        public string KoloneZaInsert => "ime,brojTelefona,username,password,prijavljen";
+        [Browsable(false)]
+        public string UbaciVrednosti =>
+            $"'{Esc(Ime)}','{Esc(BrojTelefona)}','{Esc(Username)}','{Esc(Password)}',{(Prijavljen ? 1 : 0)}";
+        private static string Esc(string s) => (s ?? "").Replace("'", "''");
 
         public IDomenObjekat ReadRow(SqlDataReader reader)
         {

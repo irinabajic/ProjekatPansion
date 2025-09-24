@@ -25,8 +25,8 @@ namespace KorisnickiInterfejs
 
         private void FrmMain_Load(object sender, EventArgs e)
         {
-            kontroler.Init(this);         // popuni levo
-            kontroler.UcitajKolege(this); // napuni grid desno
+            kontroler.Init(this);
+            kontroler.UcitajKolege(this);
         }
 
         private void btnLogout_Click(object sender, EventArgs e)
@@ -37,8 +37,8 @@ namespace KorisnickiInterfejs
                 if (r != null)
                     Komunikacija.Instance.PosaljiZahtev<object>(Operacija.Logout, r.IdRadnik);
 
-                Session.Session.Instance.PrijavljeniRadnik = null; // ili .Logout()
-                                                                   // vrati se na login
+                Session.Session.Instance.PrijavljeniRadnik = null;
+
                 Hide();
                 using (var f = new FrmLogin())
                 {
@@ -59,6 +59,12 @@ namespace KorisnickiInterfejs
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnPrikaziMacke_Click(object sender, EventArgs e)
+        {
+            using (var f = new FrmMacke())
+                f.ShowDialog();
         }
     }
 }

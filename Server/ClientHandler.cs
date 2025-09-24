@@ -1,6 +1,7 @@
 ﻿using AplikacionaLogika;
 using Domen;
 using KorisnickiInterfejs.Session;
+using Microsoft.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -51,6 +52,56 @@ namespace Server
                                 break;
                             }
 
+                        //Macka
+                        case Operacija.VratiSveMacke:
+                            {
+                                var lista = AplikacionaLogika.Kontroler.Instance.VratiSveMacke();
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+                        case Operacija.DodajMacku:
+                            {
+                                var m = KomunikacijaHelper.ReadType<Macka>(req.Objekat);
+                                int id = AplikacionaLogika.Kontroler.Instance.DodajMacku(m);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = id });
+                                break;
+                            }
+                        case Operacija.IzmeniMacku:
+                            {
+                                try
+                                {
+                                    var m = KomunikacijaHelper.ReadType<Domen.Macka>(req.Objekat);
+                                    if (string.IsNullOrWhiteSpace(m.Naziv) ||
+                                        string.IsNullOrWhiteSpace(m.Rasa) ||
+                                        string.IsNullOrWhiteSpace(m.Napomene))
+                                        throw new Exception("Sva polja su obavezna.");
+
+                                    AplikacionaLogika.Kontroler.Instance.IzmeniMacku(m);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
+                                }
+                                catch (Exception ex)
+                                {
+                                    helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message });
+                                }
+                                break;
+                            }
+                        case Operacija.ObrisiMacku:
+                            {
+                                int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
+                                AplikacionaLogika.Kontroler.Instance.ObrisiMacku(id);
+                                helper.Posalji(new Odgovor { Signal = true, Poruka = "OK" });
+                                break;
+                            }
+                        
+                        case Operacija.PretraziMacke:
+                            {
+                                string kriterijum = KomunikacijaHelper.ReadType<string>(req.Objekat);
+                                var lista = AplikacionaLogika.Kontroler.Instance.PretraziMacke(kriterijum);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+
+
                         case Operacija.Logout:
                             {
                                 int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
@@ -71,7 +122,11 @@ namespace Server
                             break;
                     }
                 }
-            } 
+            }
+            catch (SqlException)
+            {
+                helper.Posalji(new Odgovor { Signal = false, Poruka = "Mačka je vezana za prijemni obrazac." });
+            }
             catch (Exception ex)
             {
                 Debug.WriteLine("[SERVER] CH error: " + ex.Message);

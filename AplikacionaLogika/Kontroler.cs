@@ -23,6 +23,30 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
+        //Macka
+
+        public List<Macka> VratiSveMacke()
+        {
+            var so = new VratiSveMackeSO(); so.IzvrsiTemplejt(); return so.Rez;
+        }
+        public int DodajMacku(Macka m)
+        {
+            var so = new DodajMackuSO(m); so.IzvrsiTemplejt(); return so.NoviId;
+        }
+        public void IzmeniMacku(Macka m)
+        {
+            var so = new IzmeniMackuSO(m); so.IzvrsiTemplejt();
+        }
+        public void ObrisiMacku(int idMacka)
+        {
+            var so = new ObrisiMackuSO(idMacka); so.IzvrsiTemplejt();
+        }
+        public List<Macka> PretraziMacke(string kriterijum)
+        {
+            var so = new PretraziMackeSO(kriterijum); so.IzvrsiTemplejt(); return so.Rez;
+        }
+
+
         public void Logout(int idRadnik)
         {
             var so = new OdjaviRadnikaSO(idRadnik);

@@ -19,8 +19,11 @@ namespace Domen
         
         public string NazivTabele => "Vlasnik";
 
-        public string UbaciVrednosti => $"{IdVlasnik},'{Ime}',{BrojTelefona},'{Adresa}','{Email}',{IdMesto}";
+        public string KoloneZaInsert => "ime,brojTelefona,adresa,email,idMesto";
+        public string UbaciVrednosti => $"'{Esc(Ime)}',{BrojTelefona},'{Esc(Adresa)}','{Esc(Email)}',{IdMesto}";
 
+
+        private static string Esc(string s) => (s ?? "").Replace("'", "''");
         public IDomenObjekat ReadRow(SqlDataReader reader)
         {
             return new Vlasnik

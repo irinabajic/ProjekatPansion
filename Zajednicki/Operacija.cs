@@ -2,11 +2,17 @@
 {
     public enum Operacija
     {
-        KreirajMacka,
         Login,
-        KrajKomunikacije,
-        VratiSviPrijavljenRadnik,
         VratiSveRadnike,
-        Logout
+
+        // Macka CRUD
+        VratiSveMacke,
+        DodajMacku,
+        IzmeniMacku,
+        ObrisiMacku,
+        PretraziMacke,
+
+        Logout,
+        KrajKomunikacije
     }
 }

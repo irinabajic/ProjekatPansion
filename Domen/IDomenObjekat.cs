@@ -11,6 +11,7 @@ namespace Domen
     {
         string NazivTabele { get; }
         string UbaciVrednosti { get; }
+        string KoloneZaInsert { get; }
 
         IDomenObjekat ReadRow(SqlDataReader reader);
     }

@@ -38,13 +38,14 @@
             label6 = new Label();
             dgvKolege = new DataGridView();
             btnLogout = new Button();
+            btnPrikaziMacke = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(17, 62);
+            label1.Location = new Point(24, 62);
             label1.Name = "label1";
             label1.Size = new Size(81, 15);
             label1.TabIndex = 0;
@@ -53,7 +54,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(17, 90);
+            label2.Location = new Point(24, 90);
             label2.Name = "label2";
             label2.Size = new Size(44, 15);
             label2.TabIndex = 1;
@@ -63,7 +64,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(14, 18);
+            label3.Location = new Point(21, 18);
             label3.Name = "label3";
             label3.Size = new Size(112, 25);
             label3.TabIndex = 2;
@@ -72,7 +73,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(17, 118);
+            label4.Location = new Point(24, 118);
             label4.Name = "label4";
             label4.Size = new Size(77, 15);
             label4.TabIndex = 3;
@@ -106,7 +107,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label6.Location = new Point(578, 18);
+            label6.Location = new Point(566, 18);
             label6.Name = "label6";
             label6.Size = new Size(210, 25);
             label6.TabIndex = 8;
@@ -115,7 +116,7 @@
             // dgvKolege
             // 
             dgvKolege.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvKolege.Location = new Point(368, 62);
+            dgvKolege.Location = new Point(356, 62);
             dgvKolege.Name = "dgvKolege";
             dgvKolege.Size = new Size(420, 150);
             dgvKolege.TabIndex = 9;
@@ -130,11 +131,22 @@
             btnLogout.UseVisualStyleBackColor = true;
             btnLogout.Click += btnLogout_Click;
             // 
+            // btnPrikaziMacke
+            // 
+            btnPrikaziMacke.Location = new Point(625, 289);
+            btnPrikaziMacke.Name = "btnPrikaziMacke";
+            btnPrikaziMacke.Size = new Size(151, 23);
+            btnPrikaziMacke.TabIndex = 11;
+            btnPrikaziMacke.Text = "Prikazi sve macke";
+            btnPrikaziMacke.UseVisualStyleBackColor = true;
+            btnPrikaziMacke.Click += btnPrikaziMacke_Click;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnPrikaziMacke);
             Controls.Add(btnLogout);
             Controls.Add(dgvKolege);
             Controls.Add(label6);
@@ -165,6 +177,7 @@
         private Label label6;
         private DataGridView dgvKolege;
         private Button btnLogout;
+        private Button btnPrikaziMacke;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblEmail; set => lblEmail = value; }

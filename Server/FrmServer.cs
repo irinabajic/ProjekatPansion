@@ -71,6 +71,7 @@ namespace Server
                     dgvRadnici.Columns["Password"].Visible = false;
                 if (dgvRadnici.Columns.Contains("Prijavljen"))
                     dgvRadnici.Columns["Prijavljen"].Visible = false;
+
             }
             catch
             {

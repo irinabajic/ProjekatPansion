@@ -16,16 +16,21 @@ namespace Repozitorijum.GenerickiRepozitorijum
     {
         private Broker broker = new Broker();
 
-        public void Dodaj(IDomenObjekat obj)
+        public int Dodaj(IDomenObjekat obj)
         {
-            SqlCommand komanda = broker.NapraviKomandu();
-            komanda.CommandText = $"insert into {obj.NazivTabele} values ({obj.UbaciVrednosti})";
-            komanda.ExecuteNonQuery();
+            var cmd = broker.NapraviKomandu();
+            cmd.CommandText =
+                $"INSERT INTO {obj.NazivTabele} ({obj.KoloneZaInsert}) VALUES ({obj.UbaciVrednosti}); " +
+                "SELECT CAST(SCOPE_IDENTITY() AS INT);";
+            object id = cmd.ExecuteScalar();
+            return Convert.ToInt32(id);
         }
 
-        public void Obrisi(IDomenObjekat obj) 
+        public int Obrisi(IDomenObjekat obj, string whereClause) 
         {
-            throw new NotImplementedException();
+            var cmd = broker.NapraviKomandu();
+            cmd.CommandText = $"DELETE FROM {obj.NazivTabele} WHERE {whereClause}";
+            return cmd.ExecuteNonQuery();
         }
 
         public List<IDomenObjekat> VratiSvi(IDomenObjekat obj)
@@ -42,10 +47,7 @@ namespace Repozitorijum.GenerickiRepozitorijum
             return rez;
         }
 
-        public void Login(string username, string password)
-        {
-
-        }
+   
 
         public List<IDomenObjekat> Pretrazi(IDomenObjekat obj, string kriterijum)
         {

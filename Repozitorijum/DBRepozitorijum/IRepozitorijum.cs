@@ -17,10 +17,10 @@ namespace Repozitorijum.DBRepozitorijum
         //select * from product where ...
 
         //select * from nazivTabele joinUslov uslov
-        void Dodaj(T t);
+        int Dodaj(T t);
         List<T> VratiSvi(T t);
         List<T> Pretrazi(T t, string kriterijum);
-        void Obrisi(T t);
+        int Obrisi(T t, string whereClause);
         int Izmeni(T t, string setClause, string whereClause);
 
         void OtvoriKonekciju();

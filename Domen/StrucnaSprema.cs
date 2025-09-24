@@ -17,8 +17,10 @@ namespace Domen
 
         public string NazivTabele => "StrucnaSprema";
 
-        public string UbaciVrednosti => $"{IdStrucnaSprema},'{Naziv}',{StepenObrazovanja},'{Ustanova}'";
+        public string KoloneZaInsert => "naziv,stepenObrazovanja,ustanova";
+        public string UbaciVrednosti => $"'{Esc(Naziv)}',{StepenObrazovanja},'{Esc(Ustanova)}'";
 
+        private static string Esc(string s) => (s ?? "").Replace("'", "''");
         public IDomenObjekat ReadRow(SqlDataReader reader)
         {
             return new StrucnaSprema

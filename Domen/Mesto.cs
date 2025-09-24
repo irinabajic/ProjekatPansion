@@ -15,8 +15,10 @@ namespace Domen
 
         public string NazivTabele => "Mesto";
 
-        public string UbaciVrednosti => $"{IdMesto},'{Koordinate}'";
+        public string KoloneZaInsert => "koordinate";
+        public string UbaciVrednosti => $"'{Esc(Koordinate)}'";
 
+        private static string Esc(string s) => (s ?? "").Replace("'", "''");
         public IDomenObjekat ReadRow(SqlDataReader reader)
         {
             return new Mesto

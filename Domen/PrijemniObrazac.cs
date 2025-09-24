@@ -16,8 +16,11 @@ namespace Domen
         public int IdVlasnik { get; set; }
         public string NazivTabele => "PrijemniObrazac";
 
-        public string UbaciVrednosti => $"{IdPrijemniObrazac},'{Datum:yyyy-MM-dd}',{IdRadnik},{IdVlasnik}";
+        public string KoloneZaInsert => "datum,idRadnik,idVlasnik";
+        public string UbaciVrednosti => $"'{Datum:yyyy-MM-dd}',{IdRadnik},{IdVlasnik}";
 
+
+        private static string Esc(string s) => (s ?? "").Replace("'", "''");
         public IDomenObjekat ReadRow(SqlDataReader reader)
         {
             return new PrijemniObrazac

@@ -16,8 +16,10 @@ namespace Domen
 
         public string NazivTabele => "RSS";
 
-        public string UbaciVrednosti => $"{IdRadnik},{IdStrucnaSprema},'{BrojSertifikata}'";
+        public string KoloneZaInsert => "idRadnik,idStrucnaSprema,brojSertifikata";
+        public string UbaciVrednosti => $"{IdRadnik},{IdStrucnaSprema},'{Esc(BrojSertifikata)}'";
 
+        private static string Esc(string s) => (s ?? "").Replace("'", "''");
         public IDomenObjekat ReadRow(SqlDataReader reader)
         {
             return new RSS
