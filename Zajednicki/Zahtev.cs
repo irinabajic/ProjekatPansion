@@ -8,12 +8,8 @@ namespace Zajednicki
 {
     public class Zahtev
     {
-        public object Objekat { get; }
+        public object Objekat { get; set; }
         public Operacija Operacija { get; set; }
-        public Zahtev(Operacija operacija, object objekat)
-        {
-            Operacija = operacija;
-            Objekat = objekat;
-        }
+        
     }
 }
