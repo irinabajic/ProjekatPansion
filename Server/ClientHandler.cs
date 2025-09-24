@@ -51,6 +51,16 @@ namespace Server
                                 break;
                             }
 
+                        case Operacija.Logout:
+                            {
+                                int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
+                                AplikacionaLogika.Kontroler.Instance.Logout(id);
+                                helper.Posalji(new Odgovor { Signal = true, Poruka = "OK" });
+                                // ako želiš da zatvoriš vezu posle logout-a:
+                                // radi = false; return;
+                                break;
+                            }
+
                         case Operacija.KrajKomunikacije:
                             helper.Posalji(new Odgovor { Signal = true, Poruka = "Kraj" });
                             radi = false;

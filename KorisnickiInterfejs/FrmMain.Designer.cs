@@ -37,6 +37,7 @@
             lblTelefon = new Label();
             label6 = new Label();
             dgvKolege = new DataGridView();
+            btnLogout = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             SuspendLayout();
             // 
@@ -119,11 +120,22 @@
             dgvKolege.Size = new Size(420, 150);
             dgvKolege.TabIndex = 9;
             // 
+            // btnLogout
+            // 
+            btnLogout.Location = new Point(701, 402);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(75, 23);
+            btnLogout.TabIndex = 10;
+            btnLogout.Text = "Logout";
+            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.Click += btnLogout_Click;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnLogout);
             Controls.Add(dgvKolege);
             Controls.Add(label6);
             Controls.Add(lblTelefon);
@@ -152,6 +164,7 @@
         private Label lblTelefon;
         private Label label6;
         private DataGridView dgvKolege;
+        private Button btnLogout;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblEmail; set => lblEmail = value; }

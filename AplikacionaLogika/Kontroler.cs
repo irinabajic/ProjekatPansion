@@ -23,6 +23,12 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
+        public void Logout(int idRadnik)
+        {
+            var so = new OdjaviRadnikaSO(idRadnik);
+            so.IzvrsiTemplejt();
+        }
+
         public void OdjaviSve()
         {
             var so = new OdjaviSveRadnikeSO();

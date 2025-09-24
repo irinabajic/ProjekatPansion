@@ -6,6 +6,7 @@
         Login,
         KrajKomunikacije,
         VratiSviPrijavljenRadnik,
-        VratiSveRadnike
+        VratiSveRadnike,
+        Logout
     }
 }
