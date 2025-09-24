@@ -11,7 +11,7 @@ namespace DBBroker
 
         public Broker()
         {
-            konekcija = new SqlConnection(@"Data source=(localdb)\MSSQLLocalDB;Initial Catalog=PansionDB;Integrated Security=True;");
+            konekcija = new SqlConnection(@"Data source=(localdb)\MSSQLLocalDB;Initial Catalog=PansionDB;Integrated Security=True; TrustServerCertificate=True;");
         }
 
         public SqlCommand NapraviKomandu()
