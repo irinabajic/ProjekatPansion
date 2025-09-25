@@ -23,6 +23,13 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
+        //Radnik
+
+        public void IzmeniRadnika(Radnik r)
+        {
+            var so = new IzmeniRadnikaSO(r); so.IzvrsiTemplejt();
+        }
+
         //Macka
 
         public List<Macka> VratiSveMacke()

@@ -5,6 +5,8 @@
         Login,
         VratiSveRadnike,
 
+        IzmeniRadnika,
+
         // Macka CRUD
         VratiSveMacke,
         DodajMacku,

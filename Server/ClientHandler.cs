@@ -63,6 +63,21 @@ namespace Server
                                 break;
                             }
 
+                        case Operacija.IzmeniRadnika:
+                            {
+                                try
+                                {
+                                    var r = KomunikacijaHelper.ReadType<Radnik>(req.Objekat);
+                                    AplikacionaLogika.Kontroler.Instance.IzmeniRadnika(r);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
+                                }
+                                catch (Exception ex)
+                                {
+                                    helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message });
+                                }
+                                break;
+                            }
+
                         //Macka
                         case Operacija.VratiSveMacke:
                             {

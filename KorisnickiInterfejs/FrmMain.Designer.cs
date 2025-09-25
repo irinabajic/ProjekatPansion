@@ -33,7 +33,7 @@
             label3 = new Label();
             label4 = new Label();
             lblImeIPrezime = new Label();
-            lblEmail = new Label();
+            lblUsername = new Label();
             lblTelefon = new Label();
             label6 = new Label();
             dgvKolege = new DataGridView();
@@ -42,6 +42,7 @@
             btnPrikaziVlasnike = new Button();
             btnPrikaziPrijemne = new Button();
             btnPrikaziStrucne = new Button();
+            btnIzmeni = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             SuspendLayout();
             // 
@@ -59,9 +60,9 @@
             label2.AutoSize = true;
             label2.Location = new Point(24, 90);
             label2.Name = "label2";
-            label2.Size = new Size(44, 15);
+            label2.Size = new Size(63, 15);
             label2.TabIndex = 1;
-            label2.Text = "E-mail:";
+            label2.Text = "Username:";
             // 
             // label3
             // 
@@ -90,13 +91,13 @@
             lblImeIPrezime.Size = new Size(0, 15);
             lblImeIPrezime.TabIndex = 5;
             // 
-            // lblEmail
+            // lblUsername
             // 
-            lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(114, 90);
-            lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(0, 15);
-            lblEmail.TabIndex = 6;
+            lblUsername.AutoSize = true;
+            lblUsername.Location = new Point(114, 90);
+            lblUsername.Name = "lblUsername";
+            lblUsername.Size = new Size(0, 15);
+            lblUsername.TabIndex = 6;
             // 
             // lblTelefon
             // 
@@ -174,11 +175,21 @@
             btnPrikaziStrucne.UseVisualStyleBackColor = true;
             btnPrikaziStrucne.Click += btnPrikaziStrucne_Click;
             // 
+            // btnIzmeni
+            // 
+            btnIzmeni.Location = new Point(24, 154);
+            btnIzmeni.Name = "btnIzmeni";
+            btnIzmeni.Size = new Size(185, 23);
+            btnIzmeni.TabIndex = 15;
+            btnIzmeni.Text = "Izmeni moje podatke";
+            btnIzmeni.UseVisualStyleBackColor = true;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnIzmeni);
             Controls.Add(btnPrikaziStrucne);
             Controls.Add(btnPrikaziPrijemne);
             Controls.Add(btnPrikaziVlasnike);
@@ -187,7 +198,7 @@
             Controls.Add(dgvKolege);
             Controls.Add(label6);
             Controls.Add(lblTelefon);
-            Controls.Add(lblEmail);
+            Controls.Add(lblUsername);
             Controls.Add(lblImeIPrezime);
             Controls.Add(label4);
             Controls.Add(label3);
@@ -208,7 +219,7 @@
         private Label label3;
         private Label label4;
         private Label lblImeIPrezime;
-        private Label lblEmail;
+        private Label lblUsername;
         private Label lblTelefon;
         private Label label6;
         private DataGridView dgvKolege;
@@ -217,10 +228,12 @@
         private Button btnPrikaziVlasnike;
         private Button btnPrikaziPrijemne;
         private Button btnPrikaziStrucne;
+        private Button btnIzmeni;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
-        public Label LblEmail { get => lblEmail; set => lblEmail = value; }
+        public Label LblEmail { get => lblUsername; set => lblUsername = value; }
         public Label LblTelefon { get => lblTelefon; set => lblTelefon = value; }
         public DataGridView DgvKolege { get => dgvKolege; set => dgvKolege = value; }
-       }
+        public Button BtnIzmeni { get => btnIzmeni; set => btnIzmeni = value; }
+    }
 }

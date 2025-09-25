@@ -21,8 +21,20 @@ namespace KorisnickiInterfejs
             dgvKolege.ReadOnly = true;
             dgvKolege.AutoGenerateColumns = true;
             dgvKolege.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            btnIzmeni.Click += (s, e) =>
+            {
+                using var frm = new FrmMojProfil(Session.Session.Instance.PrijavljeniRadnik);
+                if (frm.ShowDialog() == DialogResult.OK)
+                    OsveziMojePodatkeNaEkranu();
+            };
         }
-
+        private void OsveziMojePodatkeNaEkranu()
+        {
+            // prilagodi imenima svojih labela:
+            lblImeIPrezime.Text = $"{Session.Session.Instance.PrijavljeniRadnik.Ime}";
+            lblUsername.Text = $"{Session.Session.Instance.PrijavljeniRadnik.Username}";
+            lblTelefon.Text = Session.Session.Instance.PrijavljeniRadnik.BrojTelefona;
+        }
         private void FrmMain_Load(object sender, EventArgs e)
         {
             kontroler.Init(this);
