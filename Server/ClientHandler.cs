@@ -37,13 +37,24 @@ namespace Server
                     switch (req.Operacija)
                     {
                         case Operacija.Login:
+                            try
                             {
                                 // telo dolazi kao Radnik 
                                 var ulaz = KomunikacijaHelper.ReadType<Radnik>(req.Objekat);
                                 var r = AplikacionaLogika.Kontroler.Instance.Login(ulaz.Username, ulaz.Password);
-                                helper.Posalji(new Odgovor { Signal = true, Objekat = r });
-                                break;
+
+                                if (r != null)
+                                {
+                                    // uspešno
+                                    helper.Posalji(new Odgovor { Signal = true, Objekat = r });
+                                }
                             }
+                            catch (Exception ex)
+                            {
+                                // greška u sistemu
+                                helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message });
+                            }
+                            break;
 
                         case Operacija.VratiSveRadnike:
                             {
