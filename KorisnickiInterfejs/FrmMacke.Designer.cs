@@ -39,42 +39,44 @@
             btnDodaj = new Button();
             btnIzmeni = new Button();
             btnObrisi = new Button();
+            btnPretrazi = new Button();
+            txtPretraga = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvMacke).BeginInit();
             SuspendLayout();
             // 
             // dgvMacke
             // 
             dgvMacke.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvMacke.Location = new Point(87, 42);
+            dgvMacke.Location = new Point(87, 63);
             dgvMacke.Name = "dgvMacke";
             dgvMacke.Size = new Size(390, 215);
             dgvMacke.TabIndex = 0;
             // 
             // txtNaziv
             // 
-            txtNaziv.Location = new Point(159, 275);
+            txtNaziv.Location = new Point(191, 296);
             txtNaziv.Name = "txtNaziv";
-            txtNaziv.Size = new Size(318, 23);
+            txtNaziv.Size = new Size(286, 23);
             txtNaziv.TabIndex = 1;
             // 
             // txtRasa
             // 
-            txtRasa.Location = new Point(159, 316);
+            txtRasa.Location = new Point(191, 337);
             txtRasa.Name = "txtRasa";
-            txtRasa.Size = new Size(318, 23);
+            txtRasa.Size = new Size(286, 23);
             txtRasa.TabIndex = 2;
             // 
             // txtNapomene
             // 
-            txtNapomene.Location = new Point(159, 357);
+            txtNapomene.Location = new Point(191, 378);
             txtNapomene.Name = "txtNapomene";
-            txtNapomene.Size = new Size(318, 23);
+            txtNapomene.Size = new Size(286, 23);
             txtNapomene.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(85, 278);
+            label1.Location = new Point(85, 299);
             label1.Name = "label1";
             label1.Size = new Size(39, 15);
             label1.TabIndex = 4;
@@ -83,7 +85,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(85, 319);
+            label2.Location = new Point(85, 340);
             label2.Name = "label2";
             label2.Size = new Size(34, 15);
             label2.TabIndex = 5;
@@ -92,7 +94,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(85, 360);
+            label3.Location = new Point(85, 381);
             label3.Name = "label3";
             label3.Size = new Size(69, 15);
             label3.TabIndex = 6;
@@ -100,7 +102,7 @@
             // 
             // btnOsvezi
             // 
-            btnOsvezi.Location = new Point(87, 415);
+            btnOsvezi.Location = new Point(87, 436);
             btnOsvezi.Name = "btnOsvezi";
             btnOsvezi.Size = new Size(75, 23);
             btnOsvezi.TabIndex = 7;
@@ -109,7 +111,7 @@
             // 
             // btnDodaj
             // 
-            btnDodaj.Location = new Point(191, 415);
+            btnDodaj.Location = new Point(191, 436);
             btnDodaj.Name = "btnDodaj";
             btnDodaj.Size = new Size(75, 23);
             btnDodaj.TabIndex = 8;
@@ -118,7 +120,7 @@
             // 
             // btnIzmeni
             // 
-            btnIzmeni.Location = new Point(297, 415);
+            btnIzmeni.Location = new Point(297, 436);
             btnIzmeni.Name = "btnIzmeni";
             btnIzmeni.Size = new Size(75, 23);
             btnIzmeni.TabIndex = 9;
@@ -127,18 +129,36 @@
             // 
             // btnObrisi
             // 
-            btnObrisi.Location = new Point(402, 415);
+            btnObrisi.Location = new Point(402, 436);
             btnObrisi.Name = "btnObrisi";
             btnObrisi.Size = new Size(75, 23);
             btnObrisi.TabIndex = 10;
             btnObrisi.Text = "Obrisi";
             btnObrisi.UseVisualStyleBackColor = true;
             // 
+            // btnPretrazi
+            // 
+            btnPretrazi.Location = new Point(87, 25);
+            btnPretrazi.Name = "btnPretrazi";
+            btnPretrazi.Size = new Size(75, 23);
+            btnPretrazi.TabIndex = 11;
+            btnPretrazi.Text = "Pretrazi";
+            btnPretrazi.UseVisualStyleBackColor = true;
+            // 
+            // txtPretraga
+            // 
+            txtPretraga.Location = new Point(191, 26);
+            txtPretraga.Name = "txtPretraga";
+            txtPretraga.Size = new Size(286, 23);
+            txtPretraga.TabIndex = 12;
+            // 
             // FrmMacke
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(572, 492);
+            ClientSize = new Size(572, 501);
+            Controls.Add(txtPretraga);
+            Controls.Add(btnPretrazi);
             Controls.Add(btnObrisi);
             Controls.Add(btnIzmeni);
             Controls.Add(btnDodaj);
@@ -170,10 +190,14 @@
         private Button btnDodaj;
         private Button btnIzmeni;
         private Button btnObrisi;
+        private Button btnPretrazi;
+        private TextBox txtPretraga;
 
         public DataGridView DgvMacke { get => dgvMacke; set => dgvMacke = value; }
         public TextBox TxtNaziv { get => txtNaziv; set => txtNaziv = value; }
         public TextBox TxtRasa { get => txtRasa; set => txtRasa = value; }
         public TextBox TxtNapomene { get => txtNapomene; set => txtNapomene = value; }
+        public Button BtnPretrazi { get => btnPretrazi; set => btnPretrazi = value; }
+        public TextBox TxtPretraga { get => txtPretraga; set => txtPretraga = value; }
     }
 }

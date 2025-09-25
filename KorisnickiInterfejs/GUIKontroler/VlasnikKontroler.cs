@@ -115,16 +115,16 @@ namespace KorisnickiInterfejs.GUIKontroler
             Osvezi(f);
         }
 
-        //public void Pretrazi(FrmVlasnik f)
-        //{
-        //    //var kljuc = f.TxtPretraga.Text?.Trim() ?? "";
-        //    var lista = Komunikacija.Instance
-        //        .PosaljiZahtev<List<Domen.Vlasnik>>(Operacija.PretraziVlasnike, kljuc)
-        //        ?? new List<Domen.Vlasnik>();
+        public void Pretrazi(FrmVlasnik f)
+        {
+            var kljuc = f.TxtPretraga.Text?.Trim() ?? "";
+            var lista = Komunikacija.Instance
+                .PosaljiZahtev<List<Domen.Vlasnik>>(Operacija.PretraziVlasnike, kljuc)
+                ?? new List<Domen.Vlasnik>();
 
-        //    f.DgvVlasnici.DataSource = new BindingList<Domen.Vlasnik>(lista);
-        //    SakrijMetaKolone(f.DgvVlasnici);
-        //}
+            f.DgvVlasnici.DataSource = new BindingList<Domen.Vlasnik>(lista);
+            SakrijMetaKolone(f.DgvVlasnici);
+        }
 
         public void PopuniDetaljeIzSelektovanog(FrmVlasnik f)
         {

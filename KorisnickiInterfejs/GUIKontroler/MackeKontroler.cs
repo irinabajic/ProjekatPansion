@@ -105,6 +105,17 @@ namespace KorisnickiInterfejs.GUIKontroler
             Osvezi(f);
         }
 
+        public void Pretrazi(FrmMacke f)
+        {
+            var kljuc = f.TxtPretraga.Text?.Trim() ?? "";
+
+            var lista = Komunikacija.Instance
+                .PosaljiZahtev<List<Domen.Macka>>(Operacija.PretraziMacke, kljuc)
+                ?? new List<Domen.Macka>();
+
+            f.DgvMacke.DataSource = new BindingList<Domen.Macka>(lista);
+        }
+
         public void PopuniDetaljeIzSelektovanog(FrmMacke f)
         {
             if (f.DgvMacke.CurrentRow?.DataBoundItem is Macka sel)

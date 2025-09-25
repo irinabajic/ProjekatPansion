@@ -28,6 +28,7 @@ namespace KorisnickiInterfejs
             btnDodaj.Click += (s, e) => kontroler.Dodaj(this);
             btnIzmeni.Click += (s, e) => kontroler.Izmeni(this);
             btnObrisi.Click += (s, e) => kontroler.Obrisi(this);
+            btnPretrazi.Click += (s, e) => kontroler.Pretrazi(this);
             dgvMacke.CellDoubleClick += (s, e) => kontroler.PopuniDetaljeIzSelektovanog(this);
         }
 
