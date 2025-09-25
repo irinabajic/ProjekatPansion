@@ -19,6 +19,13 @@
         ObrisiVlasnika,
         PretraziVlasnike,
 
+        // Prijemni obrazac CRUD
+        VratiSvePrijemneObrasce,
+        DodajPrijemniObrazac,
+        IzmeniPrijemniObrazac,
+        ObrisiPrijemniObrazac,
+        PretraziPrijemneObrasce,
+
         Logout,
         KrajKomunikacije
     }

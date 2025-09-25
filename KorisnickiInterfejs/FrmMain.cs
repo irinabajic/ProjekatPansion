@@ -72,5 +72,11 @@ namespace KorisnickiInterfejs
             using (var f = new FrmVlasnik())
                 f.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            using (var f = new FrmPrijemniObrasci())
+                f.ShowDialog();
+        }
     }
 }

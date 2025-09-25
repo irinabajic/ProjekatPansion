@@ -40,6 +40,7 @@
             btnLogout = new Button();
             btnPrikaziMacke = new Button();
             btnPrikaziVlasnike = new Button();
+            button1 = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             SuspendLayout();
             // 
@@ -134,9 +135,9 @@
             // 
             // btnPrikaziMacke
             // 
-            btnPrikaziMacke.Location = new Point(625, 289);
+            btnPrikaziMacke.Location = new Point(591, 275);
             btnPrikaziMacke.Name = "btnPrikaziMacke";
-            btnPrikaziMacke.Size = new Size(151, 23);
+            btnPrikaziMacke.Size = new Size(185, 23);
             btnPrikaziMacke.TabIndex = 11;
             btnPrikaziMacke.Text = "Prikazi sve macke";
             btnPrikaziMacke.UseVisualStyleBackColor = true;
@@ -144,19 +145,30 @@
             // 
             // btnPrikaziVlasnike
             // 
-            btnPrikaziVlasnike.Location = new Point(625, 318);
+            btnPrikaziVlasnike.Location = new Point(591, 304);
             btnPrikaziVlasnike.Name = "btnPrikaziVlasnike";
-            btnPrikaziVlasnike.Size = new Size(151, 23);
+            btnPrikaziVlasnike.Size = new Size(185, 23);
             btnPrikaziVlasnike.TabIndex = 12;
             btnPrikaziVlasnike.Text = "Prikazi sve vlasnike";
             btnPrikaziVlasnike.UseVisualStyleBackColor = true;
             btnPrikaziVlasnike.Click += btnPrikaziVlasnike_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(591, 333);
+            button1.Name = "button1";
+            button1.Size = new Size(185, 23);
+            button1.TabIndex = 13;
+            button1.Text = "Prikazi sve prijemne obrasce";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(btnPrikaziVlasnike);
             Controls.Add(btnPrikaziMacke);
             Controls.Add(btnLogout);
@@ -191,6 +203,7 @@
         private Button btnLogout;
         private Button btnPrikaziMacke;
         private Button btnPrikaziVlasnike;
+        private Button button1;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblEmail; set => lblEmail = value; }
