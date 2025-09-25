@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AplikacionaLogika", "Aplika
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppDatabase", "ConsoleAppDatabase\ConsoleAppDatabase.csproj", "{62E9539D-7F52-403B-B786-72AEFCD9540D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E6C748C4-764E-464A-85AC-7774C77FE1AC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{E6C748C4-764E-464A-85AC-7774C77FE1AC}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Desktop\Arhitektura.jpg = ..\..\..\Desktop\Arhitektura.jpg
 	EndProjectSection

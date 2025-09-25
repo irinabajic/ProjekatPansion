@@ -78,5 +78,16 @@ namespace KorisnickiInterfejs
             using (var f = new FrmPrijemniObrasci())
                 f.ShowDialog();
         }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnPrikaziStrucne_Click(object sender, EventArgs e)
+        {
+            using (var f = new FrmStrucneSpreme())
+                f.ShowDialog();
+        }
     }
 }

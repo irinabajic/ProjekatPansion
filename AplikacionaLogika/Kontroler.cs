@@ -85,6 +85,27 @@ namespace AplikacionaLogika
         public List<PrijemniObrazac> PretraziPrijemneObrasce(string k)
         { var so = new PretraziPrijemneObrasceSO(k); so.IzvrsiTemplejt(); return so.Rez; }
 
+        //Strucna sprema
+        public List<StrucnaSprema> VratiSveStrucneSpreme()
+        {
+            var so = new VratiSveStrucneSpremeSO(); so.IzvrsiTemplejt(); return so.Rez;
+        }
+        public int DodajStrucnuSpremu(StrucnaSprema s)
+        {
+            var so = new DodajStrucnuSpremuSO(s); so.IzvrsiTemplejt(); return so.NoviId;
+        }
+        public void IzmeniStrucnuSpremu(StrucnaSprema s)
+        {
+            var so = new IzmeniStrucnuSpremuSO(s); so.IzvrsiTemplejt();
+        }
+        public void ObrisiStrucnuSpremu(int id)
+        {
+            var so = new ObrisiStrucnuSpremuSO(id); so.IzvrsiTemplejt();
+        }
+        public List<StrucnaSprema> PretraziStrucneSpreme(string kriterijum)
+        {
+            var so = new PretraziStrucneSpremeSO(kriterijum); so.IzvrsiTemplejt(); return so.Rez;
+        }
 
 
         public void Logout(int idRadnik)

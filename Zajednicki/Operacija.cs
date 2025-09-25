@@ -26,6 +26,13 @@
         ObrisiPrijemniObrazac,
         PretraziPrijemneObrasce,
 
+        //Strucna sprema CRUD
+        VratiSveStrucneSpreme,
+        DodajStrucnuSpremu,
+        IzmeniStrucnuSpremu,
+        ObrisiStrucnuSpremu,
+        PretraziStrucneSpreme,
+
         Logout,
         KrajKomunikacije
     }
