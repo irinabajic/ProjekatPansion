@@ -12,7 +12,7 @@ namespace Domen
     {
         public int IdVlasnik { get; set; }
         public string Ime { get; set; } = "";
-        public int BrojTelefona { get; set; }
+        public string BrojTelefona { get; set; } = "";
         public string Adresa { get; set; } = "";
         public string Email { get; set; } = "";
         public int IdMesto { get; set; }
@@ -20,7 +20,7 @@ namespace Domen
         public string NazivTabele => "Vlasnik";
 
         public string KoloneZaInsert => "ime,brojTelefona,adresa,email,idMesto";
-        public string UbaciVrednosti => $"'{Esc(Ime)}',{BrojTelefona},'{Esc(Adresa)}','{Esc(Email)}',{IdMesto}";
+        public string UbaciVrednosti => $"'{Esc(Ime)}','{BrojTelefona}','{Esc(Adresa)}','{Esc(Email)}',{IdMesto}";
 
 
         private static string Esc(string s) => (s ?? "").Replace("'", "''");
@@ -30,7 +30,7 @@ namespace Domen
             {
                 IdVlasnik = (int)reader["idVlasnik"],
                 Ime = reader["ime"] as string ?? "",
-                BrojTelefona = (int)reader["brojTelefona"],
+                BrojTelefona = reader["brojTelefona"] as string ?? "",
                 Adresa = reader["adresa"] as string ?? "",
                 Email = reader["email"] as string ?? "",
                 IdMesto = (int)reader["idMesto"]

@@ -39,6 +39,7 @@
             dgvKolege = new DataGridView();
             btnLogout = new Button();
             btnPrikaziMacke = new Button();
+            btnPrikaziVlasnike = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             SuspendLayout();
             // 
@@ -141,11 +142,22 @@
             btnPrikaziMacke.UseVisualStyleBackColor = true;
             btnPrikaziMacke.Click += btnPrikaziMacke_Click;
             // 
+            // btnPrikaziVlasnike
+            // 
+            btnPrikaziVlasnike.Location = new Point(625, 318);
+            btnPrikaziVlasnike.Name = "btnPrikaziVlasnike";
+            btnPrikaziVlasnike.Size = new Size(151, 23);
+            btnPrikaziVlasnike.TabIndex = 12;
+            btnPrikaziVlasnike.Text = "Prikazi sve vlasnike";
+            btnPrikaziVlasnike.UseVisualStyleBackColor = true;
+            btnPrikaziVlasnike.Click += btnPrikaziVlasnike_Click;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnPrikaziVlasnike);
             Controls.Add(btnPrikaziMacke);
             Controls.Add(btnLogout);
             Controls.Add(dgvKolege);
@@ -178,6 +190,7 @@
         private DataGridView dgvKolege;
         private Button btnLogout;
         private Button btnPrikaziMacke;
+        private Button btnPrikaziVlasnike;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblEmail; set => lblEmail = value; }

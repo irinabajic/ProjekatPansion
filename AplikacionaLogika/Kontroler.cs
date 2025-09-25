@@ -46,6 +46,30 @@ namespace AplikacionaLogika
             var so = new PretraziMackeSO(kriterijum); so.IzvrsiTemplejt(); return so.Rez;
         }
 
+        //Vlasnik
+
+        public List<Vlasnik> VratiSveVlasnike()
+        {
+            var so = new VratiSveVlasnikeSO(); so.IzvrsiTemplejt(); return so.Rez;
+        }
+        public int DodajVlasnika(Vlasnik v)
+        {
+            var so = new DodajVlasnikaSO(v); so.IzvrsiTemplejt(); return so.NoviId;
+        }
+        public void IzmeniVlasnika(Vlasnik v)
+        {
+            var so = new IzmeniVlasnikaSO(v); so.IzvrsiTemplejt();
+        }
+        public void ObrisiVlasnika(int idVlasnik)
+        {
+            var so = new ObrisiVlasnikaSO(idVlasnik); so.IzvrsiTemplejt();
+        }
+        public List<Vlasnik> PretraziVlasnike(string kriterijum)
+        {
+            var so = new PretraziVlasnikeSO(kriterijum); so.IzvrsiTemplejt(); return so.Rez;
+        }
+
+
 
         public void Logout(int idRadnik)
         {

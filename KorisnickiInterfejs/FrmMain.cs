@@ -66,5 +66,11 @@ namespace KorisnickiInterfejs
             using (var f = new FrmMacke())
                 f.ShowDialog();
         }
+
+        private void btnPrikaziVlasnike_Click(object sender, EventArgs e)
+        {
+            using (var f = new FrmVlasnik())
+                f.ShowDialog();
+        }
     }
 }

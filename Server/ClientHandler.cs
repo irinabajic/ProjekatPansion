@@ -101,6 +101,71 @@ namespace Server
                                 break;
                             }
 
+                        //Vlasnik
+                        // Vlasnik
+                        case Operacija.VratiSveVlasnike:
+                            {
+                                var lista = AplikacionaLogika.Kontroler.Instance.VratiSveVlasnike();
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+                        case Operacija.DodajVlasnika:
+                            {
+                                var v = KomunikacijaHelper.ReadType<Domen.Vlasnik>(req.Objekat);
+                                // osnovna validacija
+                                if (string.IsNullOrWhiteSpace(v.Ime) ||
+                                    string.IsNullOrWhiteSpace(v.BrojTelefona) ||
+                                    string.IsNullOrWhiteSpace(v.Adresa) ||
+                                    string.IsNullOrWhiteSpace(v.Email) ||
+                                    v.IdMesto <= 0)
+                                {
+                                    helper.Posalji(new Odgovor { Signal = false, Poruka = "Sva polja su obavezna (IdMesto > 0)." });
+                                    break;
+                                }
+
+                                int id = AplikacionaLogika.Kontroler.Instance.DodajVlasnika(v);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = id });
+                                break;
+                            }
+                        case Operacija.IzmeniVlasnika:
+                            {
+                                try
+                                {
+                                    var v = KomunikacijaHelper.ReadType<Domen.Vlasnik>(req.Objekat);
+
+                                    if (v.IdVlasnik <= 0 ||
+                                        string.IsNullOrWhiteSpace(v.Ime) ||
+                                        string.IsNullOrWhiteSpace(v.BrojTelefona) ||
+                                        string.IsNullOrWhiteSpace(v.Adresa) ||
+                                        string.IsNullOrWhiteSpace(v.Email) ||
+                                        v.IdMesto <= 0)
+                                        throw new Exception("Sva polja su obavezna (Id i IdMesto moraju biti > 0).");
+
+                                    AplikacionaLogika.Kontroler.Instance.IzmeniVlasnika(v);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
+                                }
+                                catch (Exception ex)
+                                {
+                                    helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message });
+                                }
+                                break;
+                            }
+                        case Operacija.ObrisiVlasnika:
+                            {
+                                int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
+                                AplikacionaLogika.Kontroler.Instance.ObrisiVlasnika(id);
+                                helper.Posalji(new Odgovor { Signal = true, Poruka = "OK" });
+                                break;
+                            }
+                        case Operacija.PretraziVlasnike:
+                            {
+                                string kriterijum = KomunikacijaHelper.ReadType<string>(req.Objekat);
+                                var lista = AplikacionaLogika.Kontroler.Instance.PretraziVlasnike(kriterijum);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+
+
 
                         case Operacija.Logout:
                             {

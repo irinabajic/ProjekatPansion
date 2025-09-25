@@ -12,6 +12,13 @@
         ObrisiMacku,
         PretraziMacke,
 
+        // Vlasnik CRUD
+        VratiSveVlasnike,
+        DodajVlasnika,
+        IzmeniVlasnika,
+        ObrisiVlasnika,
+        PretraziVlasnike,
+
         Logout,
         KrajKomunikacije
     }
