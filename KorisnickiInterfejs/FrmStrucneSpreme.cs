@@ -18,6 +18,7 @@ namespace KorisnickiInterfejs
         public FrmStrucneSpreme()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
             dgvStrucneSpreme.AutoGenerateColumns = false;
             dgvStrucneSpreme.ReadOnly = true;
             dgvStrucneSpreme.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

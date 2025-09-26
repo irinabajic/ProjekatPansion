@@ -18,6 +18,10 @@ namespace KorisnickiInterfejs
         public FrmMain()
         {
             InitializeComponent();
+
+  
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.WindowState   = FormWindowState.Maximized;   // zauzmi ceo ekran (taskbar ostaje)
             dgvKolege.ReadOnly = true;
             dgvKolege.AutoGenerateColumns = true;
             dgvKolege.SelectionMode = DataGridViewSelectionMode.FullRowSelect;

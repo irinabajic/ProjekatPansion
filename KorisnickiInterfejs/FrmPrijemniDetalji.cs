@@ -28,6 +28,7 @@ namespace KorisnickiInterfejs.GUIKontroler
             dgvStavke.AllowUserToAddRows = false;
             dgvStavke.AllowUserToDeleteRows = false;
             dgvStavke.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void FrmPrijemniDetalji_Load(object? sender, EventArgs e)

@@ -22,6 +22,7 @@ namespace KorisnickiInterfejs
         {
             InitializeComponent();
             WireUpUi();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         // Overload koji koristiš iz glavne forme: new FrmMojProfil(Session.TrenutniRadnik)

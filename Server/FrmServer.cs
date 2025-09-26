@@ -13,6 +13,7 @@ namespace Server
         public FrmServer()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
             btnZaustavi.Enabled = false;
 
             tmr = new System.Windows.Forms.Timer(); // ← OVO fali

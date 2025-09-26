@@ -11,6 +11,7 @@ namespace KorisnickiInterfejs
         {
             InitializeComponent();
             kontroler = new LoginKontroler();
+            this.StartPosition = FormStartPosition.CenterScreen;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

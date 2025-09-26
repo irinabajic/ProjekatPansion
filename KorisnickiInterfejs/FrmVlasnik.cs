@@ -20,6 +20,7 @@ namespace KorisnickiInterfejs
         public FrmVlasnik()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             dgvVlasnici.AutoGenerateColumns = false;
             dgvVlasnici.ReadOnly = true;

@@ -17,6 +17,7 @@ namespace KorisnickiInterfejs
         public FrmMacke()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             dgvMacke.AutoGenerateColumns = false;
             dgvMacke.ReadOnly = true;

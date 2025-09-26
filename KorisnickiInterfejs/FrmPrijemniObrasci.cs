@@ -18,6 +18,7 @@ namespace KorisnickiInterfejs
         public FrmPrijemniObrasci()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterScreen;
 
             dgvPrijemniObrasci.AutoGenerateColumns = false;
             dgvPrijemniObrasci.ReadOnly = true;
