@@ -43,7 +43,9 @@
             btnPrikaziPrijemne = new Button();
             btnPrikaziStrucne = new Button();
             btnIzmeni = new Button();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -184,6 +186,16 @@
             btnIzmeni.Text = "Izmeni moje podatke";
             btnIzmeni.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.macaprva;
+            pictureBox1.Location = new Point(-8, 179);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(216, 309);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 16;
+            pictureBox1.TabStop = false;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -204,10 +216,12 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            Controls.Add(pictureBox1);
             Name = "FrmMain";
             Text = "FrmMain";
             Load += FrmMain_Load;
             ((System.ComponentModel.ISupportInitialize)dgvKolege).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -229,6 +243,7 @@
         private Button btnPrikaziPrijemne;
         private Button btnPrikaziStrucne;
         private Button btnIzmeni;
+        private PictureBox pictureBox1;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblUsername; set => lblUsername = value; }
