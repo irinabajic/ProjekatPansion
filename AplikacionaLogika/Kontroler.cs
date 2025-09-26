@@ -114,6 +114,15 @@ namespace AplikacionaLogika
             var so = new PretraziStrucneSpremeSO(kriterijum); so.IzvrsiTemplejt(); return so.Rez;
         }
 
+        //Detalji prijemnog
+
+        public PrijemniDetaljiDTO VratiDetaljePrijemnogObrasca(int id)
+        {
+            var so = new VratiDetaljePrijemnogObrascaSO(id);
+            so.IzvrsiTemplejt();
+            return so.Rez;
+        }
+
 
         public void Logout(int idRadnik)
         {

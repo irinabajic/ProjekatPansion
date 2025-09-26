@@ -41,6 +41,7 @@
             btnObrisi = new Button();
             btnPretrazi = new Button();
             txtPretraga = new TextBox();
+            btnPrikaziDetalje = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvPrijemniObrasci).BeginInit();
             SuspendLayout();
             // 
@@ -153,11 +154,21 @@
             txtPretraga.Size = new Size(326, 23);
             txtPretraga.TabIndex = 12;
             // 
+            // btnPrikaziDetalje
+            // 
+            btnPrikaziDetalje.Location = new Point(509, 63);
+            btnPrikaziDetalje.Name = "btnPrikaziDetalje";
+            btnPrikaziDetalje.Size = new Size(51, 216);
+            btnPrikaziDetalje.TabIndex = 13;
+            btnPrikaziDetalje.Text = "Detalji";
+            btnPrikaziDetalje.UseVisualStyleBackColor = true;
+            // 
             // FrmPrijemniObrasci
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(559, 496);
+            ClientSize = new Size(588, 496);
+            Controls.Add(btnPrikaziDetalje);
             Controls.Add(txtPretraga);
             Controls.Add(btnPretrazi);
             Controls.Add(btnObrisi);
@@ -193,6 +204,7 @@
         private Button btnObrisi;
         private Button btnPretrazi;
         private TextBox txtPretraga;
+        private Button btnPrikaziDetalje;
 
         public TextBox TxtDatum { get => txtDatum; set => txtDatum = value; }
         public TextBox TxtIdVlasnik { get => txtIdVlasnik; set => txtIdVlasnik = value; }

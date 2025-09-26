@@ -35,6 +35,9 @@
         ObrisiStrucnuSpremu,
         PretraziStrucneSpreme,
 
+        //Detalji prijemnog
+        VratiDetaljePrijemnogObrasca,
+
         Logout,
         KrajKomunikacije
     }

@@ -12,20 +12,18 @@ namespace Domen
     {
         public int IdMesto { get; set; }
         public string Koordinate { get; set; } = "";
+        public string Naziv { get; set; } = "";   // NOVO
 
         public string NazivTabele => "Mesto";
-
-        public string KoloneZaInsert => "koordinate";
-        public string UbaciVrednosti => $"'{Esc(Koordinate)}'";
+        public string KoloneZaInsert => "koordinate,naziv"; // redosled kao u UbaciVrednosti
+        public string UbaciVrednosti => $"'{Esc(Koordinate)}','{Esc(Naziv)}'";
 
         private static string Esc(string s) => (s ?? "").Replace("'", "''");
-        public IDomenObjekat ReadRow(SqlDataReader reader)
+        public IDomenObjekat ReadRow(SqlDataReader reader) => new Mesto
         {
-            return new Mesto
-            {
-                IdMesto = (int)reader["idMesto"],
-                Koordinate = reader["koordinate"] as string ?? ""
-            };
-        }
+            IdMesto = (int)reader["idMesto"],
+            Koordinate = reader["koordinate"] as string ?? "",
+            Naziv = reader["naziv"] as string ?? ""
+        };
     }
 }

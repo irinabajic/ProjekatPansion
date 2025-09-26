@@ -282,6 +282,16 @@ namespace Server
                                 break;
                             }
 
+                            //Detalji prijemnog
+
+                        case Operacija.VratiDetaljePrijemnogObrasca:
+                            {
+                                int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
+                                var dto = AplikacionaLogika.Kontroler.Instance.VratiDetaljePrijemnogObrasca(id);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = dto });
+                                break;
+                            }
+
                         case Operacija.Logout:
                             {
                                 int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
@@ -344,17 +354,6 @@ namespace Server
         }
 
 
-        //private Odgovor KreirajOdgovor(Zahtev zahtev)
-        //{
-        //    Odgovor odgovor = new Odgovor();
-        //    switch (zahtev.Operacija)
-        //    {
-        //        case Operacija.KreirajMacka:
-        //            Kontroler.Instance.KreirajMacka((Macka)zahtev.Objekat);
-        //            odgovor.Poruka = "Macka je uspesno kreirana.";
-        //            break;
-        //    }
-        //}
     }
 }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KorisnickiInterfejs.GUIKontroler;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,8 +30,20 @@ namespace KorisnickiInterfejs
             btnObrisi.Click += (s, e) => kontroler.Obrisi(this);
             btnPretrazi.Click += (s, e) => kontroler.Pretrazi(this);
             dgvPrijemniObrasci.CellDoubleClick += (s, e) => kontroler.PopuniDetaljeIzSelektovanog(this);
-
+            btnPrikaziDetalje.Click += (s, e) =>
+            {
+                if (DgvPrijemniObrasci.CurrentRow?.DataBoundItem is Domen.PrijemniObrazac sel)
+                {
+                    using var frm = new FrmPrijemniDetalji(sel.IdPrijemniObrazac);
+                    frm.ShowDialog(this);
+                }
+                else MessageBox.Show("Izaberi prijemni obrazac u tabeli.");
+            };
+            //dvoklik
+            DgvPrijemniObrasci.CellDoubleClick += (s, e) => btnPrikaziDetalje.PerformClick();
         }
+
+
 
         private void FrmPrijemniObrasci_Load(object sender, EventArgs e)
         {
