@@ -36,6 +36,22 @@ namespace Server
                     Zahtev req = helper.Primi<Zahtev>();
                     switch (req.Operacija)
                     {
+
+                        case Operacija.RegistrujRadnika:
+                            {
+                                try
+                                {
+                                    var r = KomunikacijaHelper.ReadType<Radnik>(req.Objekat);
+                                    AplikacionaLogika.Kontroler.Instance.RegistrujRadnika(r);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Registracija uspešna." });
+                                }
+                                catch (Exception ex)
+                                {
+                                    helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message });
+                                }
+                                break;
+                            }
+
                         case Operacija.Login:
                             try
                             {

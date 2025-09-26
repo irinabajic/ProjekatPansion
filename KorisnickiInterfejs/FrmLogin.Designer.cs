@@ -33,6 +33,7 @@
             txtUsername = new TextBox();
             txtPassword = new TextBox();
             btnLogin = new Button();
+            btnRegistracija = new Button();
             SuspendLayout();
             // 
             // lblUsername
@@ -77,11 +78,21 @@
             btnLogin.UseVisualStyleBackColor = true;
             btnLogin.Click += btnLogin_Click;
             // 
+            // btnRegistracija
+            // 
+            btnRegistracija.Location = new Point(136, 152);
+            btnRegistracija.Name = "btnRegistracija";
+            btnRegistracija.Size = new Size(173, 23);
+            btnRegistracija.TabIndex = 5;
+            btnRegistracija.Text = "Register";
+            btnRegistracija.UseVisualStyleBackColor = true;
+            // 
             // FrmLogin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(434, 206);
+            Controls.Add(btnRegistracija);
             Controls.Add(btnLogin);
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
@@ -100,11 +111,13 @@
         private TextBox txtUsername;
         private TextBox txtPassword;
         private Button btnLogin;
+        private Button btnRegistracija;
 
         public Label LblUsername { get => lblUsername; set => lblUsername = value; }
         public Label LblPassword { get => lblPassword; set => lblPassword = value; }
         public TextBox TxtUsername { get => txtUsername; set => txtUsername = value; }
         public TextBox TxtPassword { get => txtPassword; set => txtPassword = value; }
         public Button BtnLogin { get => btnLogin; set => btnLogin = value; }
+        public Button BtnRegistracija { get => btnRegistracija; set => btnRegistracija = value; }
     }
 }

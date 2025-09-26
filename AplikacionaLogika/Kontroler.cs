@@ -9,6 +9,12 @@ namespace AplikacionaLogika
         public static Kontroler Instance => instance ??= new Kontroler();
         private Kontroler() { }
 
+        public void RegistrujRadnika(Radnik r)
+        {
+            var so = new RegistrujRadnikaSO(r);
+            so.IzvrsiTemplejt();
+        }
+
         public Radnik Login(string username, string password)
         {
             var so = new LoginSO(username, password);

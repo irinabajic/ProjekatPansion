@@ -6,6 +6,7 @@
         VratiSveRadnike,
 
         IzmeniRadnika,
+        RegistrujRadnika,
 
         // Macka CRUD
         VratiSveMacke,
