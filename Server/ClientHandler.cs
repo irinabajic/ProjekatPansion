@@ -238,6 +238,22 @@ namespace Server
                                 break;
                             }
 
+                        //Prijemni obrazac grid
+
+                        case Operacija.VratiSvePrijemneObrasceGrid:
+                            {
+                                var lista = AplikacionaLogika.Kontroler.Instance.VratiSvePrijemneObrasceGrid();
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+                        case Operacija.PretraziPrijemneObrasceGrid:
+                            {
+                                string k = KomunikacijaHelper.ReadType<string>(req.Objekat);
+                                var lista = AplikacionaLogika.Kontroler.Instance.PretraziPrijemneObrasceGrid(k);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+
 
                         //Strucna sprema
                         case Operacija.VratiSveStrucneSpreme:

@@ -28,6 +28,10 @@
         ObrisiPrijemniObrazac,
         PretraziPrijemneObrasce,
 
+        // Prijemni obrazac grid
+        VratiSvePrijemneObrasceGrid,
+        PretraziPrijemneObrasceGrid,
+
         //Strucna sprema CRUD
         VratiSveStrucneSpreme,
         DodajStrucnuSpremu,

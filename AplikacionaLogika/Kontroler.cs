@@ -92,6 +92,17 @@ namespace AplikacionaLogika
         public List<PrijemniObrazac> PretraziPrijemneObrasce(string k)
         { var so = new PretraziPrijemneObrasceSO(k); so.IzvrsiTemplejt(); return so.Rez; }
 
+        //Prijemni obrazac grid
+
+        public List<PrijemniObrazacGrid> VratiSvePrijemneObrasceGrid()
+        {
+            var so = new VratiSvePrijemneObrasceGridSO(); so.IzvrsiTemplejt(); return so.Rez;
+        }
+        public List<PrijemniObrazacGrid> PretraziPrijemneObrasceGrid(string k)
+        {
+            var so = new PretraziPrijemneObrasceGridSO(k); so.IzvrsiTemplejt(); return so.Rez;
+        }
+
         //Strucna sprema
         public List<StrucnaSprema> VratiSveStrucneSpreme()
         {

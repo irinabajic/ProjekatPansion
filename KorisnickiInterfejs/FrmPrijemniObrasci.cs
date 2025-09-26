@@ -28,19 +28,10 @@ namespace KorisnickiInterfejs
             btnDodaj.Click += (s, e) => kontroler.Dodaj(this);
             btnIzmeni.Click += (s, e) => kontroler.Izmeni(this);
             btnObrisi.Click += (s, e) => kontroler.Obrisi(this);
-            btnPretrazi.Click += (s, e) => kontroler.Pretrazi(this);
+            btnPretrazi.Click += (s, e) => kontroler.PretraziGrid(this);
             dgvPrijemniObrasci.CellDoubleClick += (s, e) => kontroler.PopuniDetaljeIzSelektovanog(this);
-            btnPrikaziDetalje.Click += (s, e) =>
-            {
-                if (DgvPrijemniObrasci.CurrentRow?.DataBoundItem is Domen.PrijemniObrazac sel)
-                {
-                    using var frm = new FrmPrijemniDetalji(sel.IdPrijemniObrazac);
-                    frm.ShowDialog(this);
-                }
-                else MessageBox.Show("Izaberi prijemni obrazac u tabeli.");
-            };
-            //dvoklik
-            DgvPrijemniObrasci.CellDoubleClick += (s, e) => btnPrikaziDetalje.PerformClick();
+            btnPrikaziDetalje.Click += (s, e) => kontroler.PrikaziDetalje(this);
+            DgvPrijemniObrasci.CellDoubleClick += (s, e) => kontroler.PrikaziDetalje(this);
         }
 
 

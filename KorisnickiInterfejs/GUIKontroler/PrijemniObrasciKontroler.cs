@@ -13,20 +13,66 @@ namespace KorisnickiInterfejs.GUIKontroler
     {
         public void Osvezi(FrmPrijemniObrasci f)
         {
-            try
+            var lista = Komunikacija.Instance
+                .PosaljiZahtev<List<PrijemniObrazacGrid>>(Operacija.VratiSvePrijemneObrasceGrid)
+                ?? new List<PrijemniObrazacGrid>();
+
+            f.DgvPrijemniObrasci.AutoGenerateColumns = true;
+            f.DgvPrijemniObrasci.Columns.Clear();               // da ne ostanu stare kolone
+            f.DgvPrijemniObrasci.ReadOnly = true;
+            f.DgvPrijemniObrasci.MultiSelect = false;
+            f.DgvPrijemniObrasci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            f.DgvPrijemniObrasci.DataSource = new BindingList<PrijemniObrazacGrid>(lista);
+            SakrijKolone(f.DgvPrijemniObrasci);
+            PostaviNasloveKolona(f.DgvPrijemniObrasci);
+
+            SelektujPrviRedAkoPostoji(f.DgvPrijemniObrasci);
+        }
+
+        public void PretraziGrid(FrmPrijemniObrasci f)
+        {
+            var k = f.TxtPretraga.Text?.Trim() ?? "";
+            var lista = Komunikacija.Instance
+                .PosaljiZahtev<List<PrijemniObrazacGrid>>(Operacija.PretraziPrijemneObrasceGrid, k)
+                ?? new List<PrijemniObrazacGrid>();
+
+            f.DgvPrijemniObrasci.DataSource = new BindingList<PrijemniObrazacGrid>(lista);
+            SakrijKolone(f.DgvPrijemniObrasci);
+            PostaviNasloveKolona(f.DgvPrijemniObrasci);
+            SelektujPrviRedAkoPostoji(f.DgvPrijemniObrasci);
+        }
+
+        private void SakrijKolone(DataGridView dgv)
+        {
+            foreach (var c in new[]
             {
-                var lista = Komunikacija.Instance
-                    .PosaljiZahtev<List<Domen.PrijemniObrazac>>(Operacija.VratiSvePrijemneObrasce)
-                    ?? new List<Domen.PrijemniObrazac>();
+        "NazivTabele","KoloneZaInsert","UbaciVrednosti",
+        "IdPrijemniObrazac",   // ne prikazujemo ga
+        "IdMesto","IdVlasnik","IdRadnik"  // sakrij tražene ID-jeve
+             })
+                if (dgv.Columns.Contains(c)) dgv.Columns[c].Visible = false;
+        }
 
-                f.DgvPrijemniObrasci.AutoGenerateColumns = true;
-                f.DgvPrijemniObrasci.ReadOnly = true;
-                f.DgvPrijemniObrasci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        private void PostaviNasloveKolona(DataGridView dgv)
+        {
+            void H(string name, string header) { if (dgv.Columns.Contains(name)) dgv.Columns[name].HeaderText = header; }
+            H(nameof(PrijemniObrazacGrid.Datum), "Datum");
+            H(nameof(PrijemniObrazacGrid.MestoNaziv), "Mesto");
+            H(nameof(PrijemniObrazacGrid.VlasnikIme), "Vlasnik");
+            H(nameof(PrijemniObrazacGrid.RadnikIme), "Radnik");
+            H(nameof(PrijemniObrazacGrid.Macke), "Mačke");
+        }
 
-                f.DgvPrijemniObrasci.DataSource = new BindingList<Domen.PrijemniObrazac>(lista);
-                SakrijMetaKolone(f.DgvPrijemniObrasci);
+        private static void SelektujPrviRedAkoPostoji(DataGridView dgv)
+        {
+            if (dgv.Rows.Count > 0)
+            {
+                int firstVisibleCol = dgv.Columns.Cast<DataGridViewColumn>()
+                                           .Where(c => c.Visible)
+                                           .Select(c => c.Index).DefaultIfEmpty(0).First();
+                dgv.CurrentCell = dgv.Rows[0].Cells[firstVisibleCol];
             }
-            catch (Exception ex) { MessageBox.Show("Greška pri učitavanju: " + ex.Message); }
         }
 
         private void SakrijMetaKolone(DataGridView dgv)
@@ -108,6 +154,34 @@ namespace KorisnickiInterfejs.GUIKontroler
                 f.TxtIdVlasnik.Text = sel.IdVlasnik.ToString();
             }
         }
+
+        public void PrikaziDetalje(FrmPrijemniObrasci f)
+        {
+            int? id = DohvatiSelektovaniId(f.DgvPrijemniObrasci);
+            if (id == null) { MessageBox.Show("Izaberi prijemni obrazac u tabeli."); return; }
+
+            using var frm = new FrmPrijemniDetalji(id.Value);
+            frm.ShowDialog(f);
+        }
+
+        private static int? DohvatiSelektovaniId(DataGridView dgv)
+        {
+            if (dgv.CurrentRow == null) return null;
+
+            // 1) najčešći slučaj – strong-typed objekat
+            if (dgv.CurrentRow.DataBoundItem is PrijemniObrazacGrid g)
+                return g.IdPrijemniObrazac;
+
+            // 2) fallback preko imena kolone
+            if (dgv.Columns.Contains("IdPrijemniObrazac"))
+            {
+                var val = dgv.CurrentRow.Cells["IdPrijemniObrazac"].Value;
+                if (val != null && int.TryParse(val.ToString(), out var id)) return id;
+            }
+            return null;
+        }
+
+
 
         private void OcistiPolja(FrmPrijemniObrasci f)
         {
