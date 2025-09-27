@@ -39,6 +39,7 @@ namespace Server
                     {
                         switch (req.Operacija)
                         {
+                            //Radnik
 
                             case Operacija.RegistrujRadnika:
                                 {
@@ -81,19 +82,50 @@ namespace Server
                                     helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
                                     break;
                                 }
-
+                            case Operacija.DodajRadnika:
+                                {
+                                    var r = KomunikacijaHelper.ReadType<Radnik>(req.Objekat);
+                                    int id = AplikacionaLogika.Kontroler.Instance.DodajRadnika(r);
+                                    helper.Posalji(new Odgovor { Signal = true, Objekat = id });
+                                    break;
+                                }
                             case Operacija.IzmeniRadnika:
                                 {
-                                    try
-                                    {
-                                        var r = KomunikacijaHelper.ReadType<Radnik>(req.Objekat);
-                                        AplikacionaLogika.Kontroler.Instance.IzmeniRadnika(r);
-                                        helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message });
-                                    }
+                                    var r = KomunikacijaHelper.ReadType<Radnik>(req.Objekat);
+                                    AplikacionaLogika.Kontroler.Instance.IzmeniRadnika(r);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
+                                    break;
+                                }
+                            case Operacija.ObrisiRadnika:
+                                {
+                                    int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
+                                    AplikacionaLogika.Kontroler.Instance.ObrisiRadnika(id);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "OK" });
+                                    break;
+                                }
+
+                            case Operacija.PromeniLozinkuSaVerifikacijom:
+                                {
+                                    var map = KomunikacijaHelper.ReadType<Dictionary<string, string>>(req.Objekat);
+                                    int id = int.Parse(map["IdRadnik"]);
+                                    string stara = (map.TryGetValue("Stara", out var s) ? s : "") ?? "";
+                                    string nova = (map.TryGetValue("Nova", out var n) ? n : "") ?? "";
+
+                                    AplikacionaLogika.Kontroler.Instance
+                                        .PromeniLozinkuSaVerifikacijom(id, stara, nova);
+
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "OK" });
+                                    break;
+                                }
+
+                            case Operacija.PromeniLozinkuRadnika:
+                                {
+                                    var map = KomunikacijaHelper.ReadType<Dictionary<string, string>>(req.Objekat);
+                                    int id = int.Parse(map["IdRadnik"]);
+                                    string np = (map.TryGetValue("Nova", out var v) ? v : "") ?? "";
+
+                                    AplikacionaLogika.Kontroler.Instance.PromeniLozinkuRadnika(id, np);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "OK" });
                                     break;
                                 }
 

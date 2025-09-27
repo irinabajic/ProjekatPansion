@@ -9,6 +9,7 @@ namespace AplikacionaLogika
         public static Kontroler Instance => instance ??= new Kontroler();
         private Kontroler() { }
 
+        //Radnik
         public void RegistrujRadnika(Radnik r)
         {
             var so = new RegistrujRadnikaSO(r);
@@ -29,12 +30,25 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
-        //Radnik
+        public int DodajRadnika(Radnik r)
+        { var so = new DodajRadnikaSO(r); so.IzvrsiTemplejt(); return so.NoviId; }
 
         public void IzmeniRadnika(Radnik r)
+        { var so = new IzmeniRadnikaSO(r); so.IzvrsiTemplejt(); }
+
+        public void ObrisiRadnika(int id)
+        { var so = new ObrisiRadnikaSO(id); so.IzvrsiTemplejt(); }
+
+        public void PromeniLozinkuRadnika(int id, string nova)
+        { var so = new PromeniLozinkuRadnikaSO(id, nova); so.IzvrsiTemplejt(); }
+
+        public void PromeniLozinkuSaVerifikacijom(int id, string stara, string nova)
         {
-            var so = new IzmeniRadnikaSO(r); so.IzvrsiTemplejt();
+            var so = new PromeniLozinkuSaVerifikacijomSO(id, stara, nova);
+            so.IzvrsiTemplejt();
         }
+
+
 
         //Macka
 

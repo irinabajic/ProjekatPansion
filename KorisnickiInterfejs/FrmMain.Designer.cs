@@ -45,6 +45,9 @@
             btnIzmeni = new Button();
             pictureBox1 = new PictureBox();
             btnMojaStrucnaSprema = new Button();
+            btnDodajKolegu = new Button();
+            btnIzmeniKolegu = new Button();
+            btnObrisiKolegu = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -206,11 +209,41 @@
             btnMojaStrucnaSprema.Text = "Moja strucna sprema";
             btnMojaStrucnaSprema.UseVisualStyleBackColor = true;
             // 
+            // btnDodajKolegu
+            // 
+            btnDodajKolegu.Location = new Point(356, 220);
+            btnDodajKolegu.Name = "btnDodajKolegu";
+            btnDodajKolegu.Size = new Size(75, 23);
+            btnDodajKolegu.TabIndex = 18;
+            btnDodajKolegu.Text = "Dodaj";
+            btnDodajKolegu.UseVisualStyleBackColor = true;
+            // 
+            // btnIzmeniKolegu
+            // 
+            btnIzmeniKolegu.Location = new Point(442, 220);
+            btnIzmeniKolegu.Name = "btnIzmeniKolegu";
+            btnIzmeniKolegu.Size = new Size(75, 23);
+            btnIzmeniKolegu.TabIndex = 19;
+            btnIzmeniKolegu.Text = "Izmeni";
+            btnIzmeniKolegu.UseVisualStyleBackColor = true;
+            // 
+            // btnObrisiKolegu
+            // 
+            btnObrisiKolegu.Location = new Point(701, 220);
+            btnObrisiKolegu.Name = "btnObrisiKolegu";
+            btnObrisiKolegu.Size = new Size(75, 23);
+            btnObrisiKolegu.TabIndex = 20;
+            btnObrisiKolegu.Text = "Obrisi";
+            btnObrisiKolegu.UseVisualStyleBackColor = true;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnObrisiKolegu);
+            Controls.Add(btnIzmeniKolegu);
+            Controls.Add(btnDodajKolegu);
             Controls.Add(btnMojaStrucnaSprema);
             Controls.Add(btnIzmeni);
             Controls.Add(btnPrikaziStrucne);
@@ -256,11 +289,17 @@
         private Button btnIzmeni;
         private PictureBox pictureBox1;
         private Button btnMojaStrucnaSprema;
+        private Button btnDodajKolegu;
+        private Button btnIzmeniKolegu;
+        private Button btnObrisiKolegu;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblUsername; set => lblUsername = value; }
         public Label LblTelefon { get => lblTelefon; set => lblTelefon = value; }
         public DataGridView DgvKolege { get => dgvKolege; set => dgvKolege = value; }
         public Button BtnIzmeni { get => btnIzmeni; set => btnIzmeni = value; }
+        public Button BtnDodajKolegu { get => btnDodajKolegu; set => btnDodajKolegu = value; }
+        public Button BtnIzmeniKolegu { get => btnIzmeniKolegu; set => btnIzmeniKolegu = value; }
+        public Button BtnObrisiKolegu { get => btnObrisiKolegu; set => btnObrisiKolegu = value; }
     }
 }

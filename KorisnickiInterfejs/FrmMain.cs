@@ -14,7 +14,8 @@ namespace KorisnickiInterfejs
     public partial class FrmMain : Form
     {
         private GUIKontroler.MainKontroler kontroler = new GUIKontroler.MainKontroler();
-
+        private bool _kolegaRowClicked = false;
+        private readonly GUIKontroler.KolegeKontroler _kolegeK = new GUIKontroler.KolegeKontroler();
         public FrmMain()
         {
             InitializeComponent();
@@ -25,12 +26,63 @@ namespace KorisnickiInterfejs
             dgvKolege.ReadOnly = true;
             dgvKolege.AutoGenerateColumns = true;
             dgvKolege.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvKolege.MultiSelect = false;
+
+            this.Load += (s, e) =>
+            {
+                _kolegeK.Osvezi(this);
+                _kolegaRowClicked = false;
+            };
+            dgvKolege.CellClick += (s, e) =>
+            {
+                if (e.RowIndex >= 0) _kolegaRowClicked = true;
+            };
+
+            // Dvoklik = direktno Izmeni
+            dgvKolege.CellDoubleClick += (s, e) =>
+            {
+                if (e.RowIndex < 0) return;
+                _kolegaRowClicked = true;
+                _kolegeK.Izmeni(this);
+                _kolegaRowClicked = false;
+            };
+
+            // DODAJ (samo klik na dugme)
+            btnDodajKolegu.Click += (s, e) => _kolegeK.Dodaj(this);
+
+            // IZMENI (mora single-click na red + klik na dugme)
+            btnIzmeniKolegu.Click += (s, e) =>
+            {
+                if (!_kolegaRowClicked || dgvKolege.CurrentRow?.DataBoundItem == null)
+                {
+                    MessageBox.Show("Najpre klikni na kolegu u tabeli, pa 'Izmeni'.");
+                    return;
+                }
+                _kolegeK.Izmeni(this);
+                _kolegaRowClicked = false;
+            };
+
+            // OBRIŠI (mora single-click na red + klik na dugme)
+            btnObrisiKolegu.Click += (s, e) =>
+            {
+                if (!_kolegaRowClicked || dgvKolege.CurrentRow?.DataBoundItem == null)
+                {
+                    MessageBox.Show("Najpre klikni na kolegu u tabeli, pa 'Obriši'.");
+                    return;
+                }
+                _kolegeK.Obrisi(this);
+                _kolegaRowClicked = false;
+            };
+
+
             btnIzmeni.Click += (s, e) =>
             {
                 using var frm = new FrmMojProfil(Session.Session.Instance.PrijavljeniRadnik);
                 if (frm.ShowDialog() == DialogResult.OK)
                     OsveziMojePodatkeNaEkranu();
             };
+
+
             btnMojaStrucnaSprema.Click += (s, e) =>
             {
                 if (!Session.Session.Instance.JePrijavljen)

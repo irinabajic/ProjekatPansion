@@ -9,25 +9,23 @@ namespace SistemskeOperacije
 {
     public class IzmeniRadnikaSO : OpstaSO
     {
-        private readonly Radnik r;
-        public IzmeniRadnikaSO(Radnik r) { this.r = r; }
+        private readonly Radnik _r;
+        public IzmeniRadnikaSO(Radnik r) { _r = r; }
 
         protected override void Izvrsi()
         {
-            if (r == null) throw new ArgumentNullException(nameof(r));
-            if (r.IdRadnik <= 0) throw new Exception("Id radnika je obavezan.");
+            if (_r.IdRadnik <= 0) throw new Exception("Nedostaje IdRadnik.");
+            if (string.IsNullOrWhiteSpace(_r.Username)) throw new Exception("Username je obavezan.");
 
-            string Esc(string s) => (s ?? "").Replace("'", "''");
+            string escUser = _r.Username.Replace("'", "''");
+            // (opciono) proveri unikatnost username-a:
+            // ...
 
-            var set =
-                $"ime='{Esc(r.Ime)}', " +
-                $"brojTelefona='{Esc(r.BrojTelefona)}', " +
-                $"username='{Esc(r.Username)}', " +
-                $"password='{Esc(r.Password)}', " +
-                $"prijavljen={(r.Prijavljen ? 1 : 0)}";
-
-            var rows = repozitorijum.Izmeni(new Radnik(), set, $"idRadnik = {r.IdRadnik}");
-            if (rows != 1) throw new Exception("Radnik nije pronađen ili nije izmenjen.");
+            // ⛔ password se NIKAD ne menja ovde
+            string set = $"ime='{Esc(_r.Ime)}', brojTelefona='{Esc(_r.BrojTelefona)}', username='{escUser}', prijavljen={(_r.Prijavljen ? 1 : 0)}";
+            string where = $"idRadnik={_r.IdRadnik}";
+            repozitorijum.Izmeni(new Radnik(), set, where);
         }
+        private static string Esc(string s) => (s ?? "").Replace("'", "''");
     }
 }

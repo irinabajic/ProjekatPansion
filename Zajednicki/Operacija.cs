@@ -3,10 +3,15 @@
     public enum Operacija
     {
         Login,
-        VratiSveRadnike,
 
+        //Radnik 
         IzmeniRadnika,
         RegistrujRadnika,
+        VratiSveRadnike,
+        DodajRadnika,
+        ObrisiRadnika,
+        PromeniLozinkuRadnika,
+        PromeniLozinkuSaVerifikacijom,
 
         // Macka CRUD
         VratiSveMacke,
