@@ -85,7 +85,7 @@ namespace KorisnickiInterfejs
             }
             catch (IOException ex)
             {
-                throw new Exception("Server je prekinuo vezu pre odgovora. " + ex.Message);
+                throw new Exception("Server je prekinuo vezu. Pokušaj ponovo. " + ex.Message);
             }
             catch (SocketException ex)
             {

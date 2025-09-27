@@ -25,6 +25,7 @@ namespace KorisnickiInterfejs.GUIKontroler
                 if (f.DgvRSS.CurrentRow?.DataBoundItem is RSSView sel)
                     f.TxtBrojSertifikata.Text = sel.BrojSertifikata ?? "";
             };
+            Sakrij(f.DgvRSS, "IdRadnik", "IdStrucnaSprema");
         }
 
         public void Osvezi(FrmMojaStrucnaSprema f)
@@ -112,5 +113,13 @@ namespace KorisnickiInterfejs.GUIKontroler
             foreach (var c in new[] { "UbaciVrednosti", "KoloneZaInsert", "NazivTabele" })
                 if (dgv.Columns.Contains(c)) dgv.Columns[c].Visible = false;
         }
+
+        private void Sakrij(DataGridView dgv, params string[] names)
+        {
+            foreach (var n in names)
+                if (dgv.Columns.Contains(n))
+                    dgv.Columns[n].Visible = false;
+        }
+
     }
 }

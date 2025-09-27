@@ -72,6 +72,8 @@ namespace Server
                     dgvRadnici.Columns["Password"].Visible = false;
                 if (dgvRadnici.Columns.Contains("Prijavljen"))
                     dgvRadnici.Columns["Prijavljen"].Visible = false;
+                if (dgvRadnici.Columns.Contains("IdRadnik"))
+                    dgvRadnici.Columns["IdRadnik"].Visible = false;
 
             }
             catch
@@ -79,6 +81,7 @@ namespace Server
                 // ignoriši osvežavanje dok se gasi
             }
         }
+
 
         private void FrmServer_Load(object sender, EventArgs e)
         {
