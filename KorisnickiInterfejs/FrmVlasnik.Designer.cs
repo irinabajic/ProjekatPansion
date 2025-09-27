@@ -33,7 +33,6 @@
             txtTelefon = new TextBox();
             txtAdresa = new TextBox();
             txtEmail = new TextBox();
-            txtIdMesto = new TextBox();
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
@@ -45,6 +44,7 @@
             btnObrisi = new Button();
             txtPretraga = new TextBox();
             btnPretrazi = new Button();
+            cboMesto = new ComboBox();
             ((System.ComponentModel.ISupportInitialize)dgvVlasnici).BeginInit();
             SuspendLayout();
             // 
@@ -83,13 +83,6 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(310, 23);
             txtEmail.TabIndex = 4;
-            // 
-            // txtIdMesto
-            // 
-            txtIdMesto.Location = new Point(173, 444);
-            txtIdMesto.Name = "txtIdMesto";
-            txtIdMesto.Size = new Size(310, 23);
-            txtIdMesto.TabIndex = 5;
             // 
             // label1
             // 
@@ -132,9 +125,9 @@
             label5.AutoSize = true;
             label5.Location = new Point(82, 447);
             label5.Name = "label5";
-            label5.Size = new Size(57, 15);
+            label5.Size = new Size(43, 15);
             label5.TabIndex = 10;
-            label5.Text = "Mesto ID:";
+            label5.Text = "Mesto:";
             // 
             // btnOsvezi
             // 
@@ -188,11 +181,21 @@
             btnPretrazi.Text = "Pretrazi";
             btnPretrazi.UseVisualStyleBackColor = true;
             // 
+            // cboMesto
+            // 
+            cboMesto.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboMesto.FormattingEnabled = true;
+            cboMesto.Location = new Point(173, 444);
+            cboMesto.Name = "cboMesto";
+            cboMesto.Size = new Size(310, 23);
+            cboMesto.TabIndex = 17;
+            // 
             // FrmVlasnik
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(578, 557);
+            Controls.Add(cboMesto);
             Controls.Add(btnPretrazi);
             Controls.Add(txtPretraga);
             Controls.Add(btnObrisi);
@@ -204,7 +207,6 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
-            Controls.Add(txtIdMesto);
             Controls.Add(txtEmail);
             Controls.Add(txtAdresa);
             Controls.Add(txtTelefon);
@@ -224,7 +226,6 @@
         private TextBox txtTelefon;
         private TextBox txtAdresa;
         private TextBox txtEmail;
-        private TextBox txtIdMesto;
         private Label label1;
         private Label label2;
         private Label label3;
@@ -236,18 +237,19 @@
         private Button btnObrisi;
         private TextBox txtPretraga;
         private Button btnPretrazi;
+        private ComboBox cboMesto;
 
         public DataGridView DgvVlasnici { get => dgvVlasnici; set => dgvVlasnici = value; }
         public TextBox TxtIme { get => txtIme; set => txtIme = value; }
         public TextBox TxtTelefon { get => txtTelefon; set => txtTelefon = value; }
         public TextBox TxtAdresa { get => txtAdresa; set => txtAdresa = value; }
         public TextBox TxtEmail { get => txtEmail; set => txtEmail = value; }
-        public TextBox TxtIdMesto { get => txtIdMesto; set => txtIdMesto = value; }
         public Button BtnOsvezi { get => btnOsvezi; set => btnOsvezi = value; }
         public Button BtnDodaj { get => btnDodaj; set => btnDodaj = value; }
         public Button BtnIzmeni { get => btnIzmeni; set => btnIzmeni = value; }
         public Button BtnObrisi { get => btnObrisi; set => btnObrisi = value; }
         public TextBox TxtPretraga { get => txtPretraga; set => txtPretraga = value; }
         public Button BtnPretrazi { get => btnPretrazi; set => btnPretrazi = value; }
+        public ComboBox CboMesto { get => cboMesto; set => cboMesto = value; }
     }
 }

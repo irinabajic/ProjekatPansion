@@ -49,6 +49,9 @@
         IzmeniRSS,
         ObrisiRSS,
 
+        //Mesto
+        VratiSvaMesta,
+
 
         Logout,
         KrajKomunikacije

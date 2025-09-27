@@ -355,6 +355,14 @@ namespace Server
                                 break;
                             }
 
+                        //Mesto
+                        case Operacija.VratiSvaMesta:
+                            {
+                                var lista = AplikacionaLogika.Kontroler.Instance.VratiSvaMesta();
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+
                         case Operacija.Logout:
                             {
                                 int id = KomunikacijaHelper.ReadType<int>(req.Objekat);

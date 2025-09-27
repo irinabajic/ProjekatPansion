@@ -24,7 +24,7 @@ namespace KorisnickiInterfejs.GUIKontroler
 
                 // BindingList forsira generisanje kolona i kada je lista prazna
                 f.DgvMacke.DataSource = new BindingList<Domen.Macka>(lista);
-
+                Sakrij(f.DgvMacke, "IdMacka");
                 SakrijMetaKolone(f.DgvMacke);
             }
             catch (Exception ex)

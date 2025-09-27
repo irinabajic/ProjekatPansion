@@ -166,6 +166,15 @@ namespace AplikacionaLogika
             so.IzvrsiTemplejt();
         }
 
+        //Mesto
+        public List<Mesto> VratiSvaMesta()
+        {
+            var so = new VratiSvaMestaSO();
+            so.IzvrsiTemplejt();
+            return so.Rez;
+        }
+
+
 
 
         public void Logout(int idRadnik)
