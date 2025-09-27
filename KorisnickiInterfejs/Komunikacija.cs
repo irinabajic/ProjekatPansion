@@ -74,14 +74,71 @@ namespace KorisnickiInterfejs
         public T PosaljiZahtev<T>(Operacija operacija, object objekat = null) where T : class
         {
             if (helper == null) throw new InvalidOperationException("Pozovi Connect() pre slanja.");
+
             var zahtev = new Zahtev { Operacija = operacija, Objekat = objekat };
             helper.Posalji(zahtev);
-            Odgovor odgovor = helper.Primi<Odgovor>();
-            if (!odgovor.Signal) throw new Exception(odgovor.Poruka);
 
-            // KLJUČNA LINIJA:
+            Odgovor odgovor;
+            try
+            {
+                odgovor = helper.Primi<Odgovor>();  // ovde je do sada pucalo
+            }
+            catch (IOException ex)
+            {
+                throw new Exception("Server je prekinuo vezu pre odgovora. " + ex.Message);
+            }
+            catch (SocketException ex)
+            {
+                throw new Exception("Veza sa serverom je prekinuta. " + ex.Message);
+            }
+
+            if (!odgovor.Signal)
+                throw new Exception(odgovor.Poruka ?? "Operacija nije uspela.");
+
+            // KLJUČNA LINIJA (ostaje kao i do sada):
             return KomunikacijaHelper.ReadType<T>(odgovor.Objekat);
         }
+
+        public bool PosaljiZahtevSafe(Operacija operacija, object objekat, out string poruka)
+        {
+            poruka = null;
+            if (helper == null) { poruka = "Nema konekcije."; return false; }
+
+            var zahtev = new Zahtev { Operacija = operacija, Objekat = objekat };
+            helper.Posalji(zahtev);
+
+            var odgovor = helper.Primi<Odgovor>();
+            if (!odgovor.Signal)
+            {
+                poruka = odgovor.Poruka ?? "Operacija nije uspela.";
+                return false;
+            }
+            return true;
+        }
+
+        public bool PosaljiZahtevSafe<T>(Operacija operacija, object objekat, out T rezultat, out string poruka)
+    where T : class
+        {
+            rezultat = null;
+            poruka = null;
+
+            if (helper == null) { poruka = "Nema konekcije."; return false; }
+
+            var zahtev = new Zahtev { Operacija = operacija, Objekat = objekat };
+            helper.Posalji(zahtev);
+
+            Odgovor odgovor = helper.Primi<Odgovor>();
+            if (!odgovor.Signal)
+            {
+                poruka = odgovor.Poruka ?? "Operacija nije uspela.";
+                return false;
+            }
+
+            rezultat = KomunikacijaHelper.ReadType<T>(odgovor.Objekat);
+            return true;
+        }
+
+
 
         public void ZatvoriKonekciju()
         {

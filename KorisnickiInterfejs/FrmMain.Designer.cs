@@ -44,6 +44,7 @@
             btnPrikaziStrucne = new Button();
             btnIzmeni = new Button();
             pictureBox1 = new PictureBox();
+            btnMojaStrucnaSprema = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -196,11 +197,21 @@
             pictureBox1.TabIndex = 16;
             pictureBox1.TabStop = false;
             // 
+            // btnMojaStrucnaSprema
+            // 
+            btnMojaStrucnaSprema.Location = new Point(24, 183);
+            btnMojaStrucnaSprema.Name = "btnMojaStrucnaSprema";
+            btnMojaStrucnaSprema.Size = new Size(185, 23);
+            btnMojaStrucnaSprema.TabIndex = 17;
+            btnMojaStrucnaSprema.Text = "Moja strucna sprema";
+            btnMojaStrucnaSprema.UseVisualStyleBackColor = true;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnMojaStrucnaSprema);
             Controls.Add(btnIzmeni);
             Controls.Add(btnPrikaziStrucne);
             Controls.Add(btnPrikaziPrijemne);
@@ -244,6 +255,7 @@
         private Button btnPrikaziStrucne;
         private Button btnIzmeni;
         private PictureBox pictureBox1;
+        private Button btnMojaStrucnaSprema;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblUsername; set => lblUsername = value; }

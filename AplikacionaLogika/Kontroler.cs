@@ -140,6 +140,33 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
+        //RSS
+        public List<RSSView> VratiMojeRSS(int idRadnik)
+        {
+            var so = new VratiMojeRSSSO(idRadnik);
+            so.IzvrsiTemplejt();
+            return so.Rez;
+        }
+
+        public void DodajRSS(RSS rss)
+        {
+            var so = new DodajRSSSO(rss);
+            so.IzvrsiTemplejt();
+        }
+
+        public void IzmeniRSS(RSS rss)
+        {
+            var so = new IzmeniRSSSO(rss);
+            so.IzvrsiTemplejt();
+        }
+
+        public void ObrisiRSS(RSS rss)
+        {
+            var so = new ObrisiRSSSO(rss);
+            so.IzvrsiTemplejt();
+        }
+
+
 
         public void Logout(int idRadnik)
         {

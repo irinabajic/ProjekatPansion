@@ -324,6 +324,37 @@ namespace Server
                                 break;
                             }
 
+                        //RSS
+
+                        case Operacija.VratiMojeRSS:
+                            {
+                                int idRadnik = KomunikacijaHelper.ReadType<int>(req.Objekat);
+                                var lista = AplikacionaLogika.Kontroler.Instance.VratiMojeRSS(idRadnik);
+                                helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                break;
+                            }
+                        case Operacija.DodajRSS:
+                            {
+                                var rss = KomunikacijaHelper.ReadType<Domen.RSS>(req.Objekat);
+                                AplikacionaLogika.Kontroler.Instance.DodajRSS(rss);
+                                helper.Posalji(new Odgovor { Signal = true, Poruka = "Dodato." });
+                                break;
+                            }
+                        case Operacija.IzmeniRSS:
+                            {
+                                var rss = KomunikacijaHelper.ReadType<Domen.RSS>(req.Objekat);
+                                AplikacionaLogika.Kontroler.Instance.IzmeniRSS(rss);
+                                helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
+                                break;
+                            }
+                        case Operacija.ObrisiRSS:
+                            {
+                                var rss = KomunikacijaHelper.ReadType<Domen.RSS>(req.Objekat);
+                                AplikacionaLogika.Kontroler.Instance.ObrisiRSS(rss);
+                                helper.Posalji(new Odgovor { Signal = true, Poruka = "Obrisano." });
+                                break;
+                            }
+
                         case Operacija.Logout:
                             {
                                 int id = KomunikacijaHelper.ReadType<int>(req.Objekat);
@@ -345,16 +376,36 @@ namespace Server
                     }
                 }
             }
-            catch (SqlException)
+            catch (SqlException ex) when (ex.Number == 547) // FK violation
             {
-                helper.Posalji(new Odgovor { Signal = false, Poruka = "Mačka je vezana za prijemni obrazac." });
+                // npr. pokušaj brisanja entiteta koji je u vezi
+                try
+                {
+                    helper.Posalji(new Odgovor
+                    {
+                        Signal = false,
+                        Poruka = "Operacija nije moguća: zapis je povezan sa drugim podacima."
+                    });
+                }
+                catch { /* ignoriši */ }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine("[SERVER] CH error: " + ex.Message);
+                // BILO KOJA GREŠKA – pošalji nazad poruku, ne prekidaj bez odgovora!
+                try
+                {
+                    helper.Posalji(new Odgovor
+                    {
+                        Signal = false,
+                        Poruka = ex.Message // ili "Greška na serveru." ako ne želiš detalje
+                    });
+                }
+                catch { /* ignoriši */ }
             }
             finally
             {
+                // Ako imaš petlju za više zahteva po konekciji – NE zatvaraj ovde.
+                // Ako radiš 1 zahtev po konekciji, može da ostane:
                 Close();
             }
         }

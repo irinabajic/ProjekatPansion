@@ -72,6 +72,14 @@ namespace Repozitorijum.GenerickiRepozitorijum
             komanda.CommandText = $"UPDATE {t.NazivTabele} SET {setClause} WHERE {whereClause}";
             return komanda.ExecuteNonQuery();
         }
+
+        public int DodajBezIdentity(IDomenObjekat obj)
+        {
+            var cmd = broker.NapraviKomandu();
+            cmd.CommandText = $"INSERT INTO {obj.NazivTabele} ({obj.KoloneZaInsert}) VALUES ({obj.UbaciVrednosti});";
+            return cmd.ExecuteNonQuery(); // broj pogođenih redova (1 kada uspe)
+        }
+
         public void OtvoriKonekciju()
         {
             broker.OtvoriKonekciju();

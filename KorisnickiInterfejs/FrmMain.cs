@@ -21,7 +21,7 @@ namespace KorisnickiInterfejs
 
   
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.WindowState   = FormWindowState.Maximized;   // zauzmi ceo ekran (taskbar ostaje)
+           // this.WindowState   = FormWindowState.Maximized;   // zauzmi ceo ekran (taskbar ostaje)
             dgvKolege.ReadOnly = true;
             dgvKolege.AutoGenerateColumns = true;
             dgvKolege.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -31,7 +31,20 @@ namespace KorisnickiInterfejs
                 if (frm.ShowDialog() == DialogResult.OK)
                     OsveziMojePodatkeNaEkranu();
             };
+            btnMojaStrucnaSprema.Click += (s, e) =>
+            {
+                if (!Session.Session.Instance.JePrijavljen)
+                {
+                    MessageBox.Show("Prijavi se prvo.");
+                    return;
+                }
+
+                using var frm = new FrmMojaStrucnaSprema();
+                frm.StartPosition = FormStartPosition.CenterParent; // kao i kod profila
+                frm.ShowDialog(this);
+            };
         }
+
         private void OsveziMojePodatkeNaEkranu()
         {
             // prilagodi imenima svojih labela:

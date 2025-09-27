@@ -93,16 +93,21 @@ namespace KorisnickiInterfejs.GUIKontroler
         public void Obrisi(FrmMacke f)
         {
             if (f.DgvMacke.CurrentRow?.DataBoundItem is not Macka sel)
+            { MessageBox.Show("Izaberi mačku u tabeli."); return; }
+
+            if (MessageBox.Show($"Obrisati mačku \"{sel.Naziv}\"?",
+                "Potvrda", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
+
+            if (!Komunikacija.Instance.PosaljiZahtevSafe(
+                    Operacija.ObrisiMacku, sel.IdMacka, out var poruka))
             {
-                MessageBox.Show("Izaberi mačku u tabeli.");
+                MessageBox.Show(poruka ?? "Mačka ne može da se obriše jer postoje povezani zapisi (npr. stavke prijemnog obrasca).",
+                                "Brisanje nije moguće", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // ako je u FK (StavkaObrasca) DB će odbiti — uhvati poruku iz servera
-            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.ObrisiMacku, sel.IdMacka);
-
-            OcistiPolja(f);
             Osvezi(f);
+            MessageBox.Show("Obrisano.");
         }
 
         public void Pretrazi(FrmMacke f)

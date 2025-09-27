@@ -9,7 +9,6 @@ namespace Zajednicki
     public class Odgovor
     {
         public object Objekat { get; set; }
-        public Operacija Operacija { get; set; }
         public bool Signal { get; set; }
         public string Poruka { get; set; } = "";
     }

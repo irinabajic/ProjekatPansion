@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domen;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Repozitorijum.DBRepozitorijum
         List<T> Pretrazi(T t, string kriterijum);
         int Obrisi(T t, string whereClause);
         int Izmeni(T t, string setClause, string whereClause);
+        int DodajBezIdentity(IDomenObjekat obj);
 
         void OtvoriKonekciju();
         void ZatvoriKonekciju();

@@ -43,6 +43,13 @@
         //Detalji prijemnog
         VratiDetaljePrijemnogObrasca,
 
+        //RSS
+        VratiMojeRSS,
+        DodajRSS,
+        IzmeniRSS,
+        ObrisiRSS,
+
+
         Logout,
         KrajKomunikacije
     }

@@ -97,10 +97,17 @@ namespace KorisnickiInterfejs.GUIKontroler
             if (f.DgvStrucneSpreme.CurrentRow?.DataBoundItem is not StrucnaSprema sel)
             { MessageBox.Show("Izaberi stavku u tabeli."); return; }
 
-            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.ObrisiStrucnuSpremu, sel.IdStrucnaSprema);
+            if (!Komunikacija.Instance.PosaljiZahtevSafe<object>(
+                    Operacija.ObrisiStrucnuSpremu, sel.IdStrucnaSprema, out _, out var poruka))
+            {
+                MessageBox.Show(poruka, "Brisanje nije moguće",
+                                MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             OcistiPolja(f);
             Osvezi(f);
+            MessageBox.Show("Obrisano.");
         }
 
         public void Pretrazi(FrmStrucneSpreme f)

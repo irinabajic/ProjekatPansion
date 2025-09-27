@@ -108,11 +108,20 @@ namespace KorisnickiInterfejs.GUIKontroler
             if (f.DgvVlasnici.CurrentRow?.DataBoundItem is not Vlasnik sel)
             { MessageBox.Show("Izaberi vlasnika u tabeli."); return; }
 
-            // ako postoje FK (npr. Macka.IdVlasnik), DB može odbiti — poruka dolazi sa servera
-            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.ObrisiVlasnika, sel.IdVlasnik);
+            if (MessageBox.Show($"Obrisati vlasnika \"{sel.Ime}\"?",
+                "Potvrda", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) != DialogResult.Yes) return;
 
-            OcistiPolja(f);
+            if (!Komunikacija.Instance.PosaljiZahtevSafe(
+                    Operacija.ObrisiVlasnika, sel.IdVlasnik, out var poruka))
+            {
+                // prijateljska poruka umesto Exception-a
+                MessageBox.Show(poruka ?? "Vlasnik ne može da se obriše jer je povezan sa drugim podacima (npr. prijemni obrazac ili mačka).",
+                                "Brisanje nije moguće", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             Osvezi(f);
+            MessageBox.Show("Obrisano.");
         }
 
         public void Pretrazi(FrmVlasnik f)
