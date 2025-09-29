@@ -38,7 +38,7 @@ namespace Server
             btnZaustavi.Enabled = true;
 
             tmr.Start();                          // kreni sa osvežavanjem prijavljenih
-            
+
             OsveziDgv();                          // odmah prvo punjenje
         }
 
@@ -86,6 +86,12 @@ namespace Server
         private void FrmServer_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnUrlBaze_Click(object sender, EventArgs e)
+        {
+            using var f = new FrmDbUrl();
+            f.ShowDialog(this);
         }
     }
 }

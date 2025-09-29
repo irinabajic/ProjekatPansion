@@ -32,12 +32,13 @@
             btnZaustavi = new Button();
             dgvRadnici = new DataGridView();
             lblRadnici = new Label();
+            btnUrlBaze = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRadnici).BeginInit();
             SuspendLayout();
             // 
             // btnPokreni
             // 
-            btnPokreni.Location = new Point(118, 255);
+            btnPokreni.Location = new Point(95, 261);
             btnPokreni.Name = "btnPokreni";
             btnPokreni.Size = new Size(139, 41);
             btnPokreni.TabIndex = 0;
@@ -47,7 +48,7 @@
             // 
             // btnZaustavi
             // 
-            btnZaustavi.Location = new Point(317, 255);
+            btnZaustavi.Location = new Point(338, 261);
             btnZaustavi.Name = "btnZaustavi";
             btnZaustavi.Size = new Size(139, 41);
             btnZaustavi.TabIndex = 1;
@@ -58,25 +59,36 @@
             // dgvRadnici
             // 
             dgvRadnici.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvRadnici.Location = new Point(28, 55);
+            dgvRadnici.Location = new Point(95, 74);
             dgvRadnici.Name = "dgvRadnici";
-            dgvRadnici.Size = new Size(517, 171);
+            dgvRadnici.Size = new Size(382, 171);
             dgvRadnici.TabIndex = 2;
             // 
             // lblRadnici
             // 
             lblRadnici.AutoSize = true;
-            lblRadnici.Location = new Point(25, 28);
+            lblRadnici.Location = new Point(95, 42);
             lblRadnici.Name = "lblRadnici";
             lblRadnici.Size = new Size(100, 15);
             lblRadnici.TabIndex = 3;
             lblRadnici.Text = "Prijavljeni radnici:";
+            // 
+            // btnUrlBaze
+            // 
+            btnUrlBaze.Location = new Point(385, 33);
+            btnUrlBaze.Name = "btnUrlBaze";
+            btnUrlBaze.Size = new Size(92, 29);
+            btnUrlBaze.TabIndex = 4;
+            btnUrlBaze.Text = "Konfiguracija";
+            btnUrlBaze.UseVisualStyleBackColor = true;
+            btnUrlBaze.Click += btnUrlBaze_Click;
             // 
             // FrmServer
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(575, 359);
+            Controls.Add(btnUrlBaze);
             Controls.Add(lblRadnici);
             Controls.Add(dgvRadnici);
             Controls.Add(btnZaustavi);
@@ -95,5 +107,8 @@
         private Button btnZaustavi;
         private DataGridView dgvRadnici;
         private Label lblRadnici;
+        private Button btnUrlBaze;
+
+        public Button BtnUrlBaze { get => btnUrlBaze; set => btnUrlBaze = value; }
     }
 }

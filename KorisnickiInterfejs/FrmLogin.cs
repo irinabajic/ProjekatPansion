@@ -12,12 +12,13 @@ namespace KorisnickiInterfejs
             InitializeComponent();
             kontroler = new LoginKontroler();
             this.StartPosition = FormStartPosition.CenterScreen;
-
+            txtPassword.UseSystemPasswordChar = true;
             btnRegistracija.Click += (s, e) =>
             {
                 using var frm = new FrmRegistracijaRadnika();
                 frm.ShowDialog(this); // CenterParent ?e je centrirati
             };
+
 
         }
 

@@ -1,51 +1,37 @@
 ﻿using Domen;
 using Microsoft.Data.SqlClient;
+using Server;
+using System;
 
 namespace DBBroker
 {
     //sluzi samo za kreiranje konekcije
     public class Broker
     {
-        private SqlConnection konekcija;
+        private SqlConnection konekcija = new SqlConnection();
         private SqlTransaction transakcija;
 
-        public Broker()
-        {
-            konekcija = new SqlConnection(@"Data source=(localdb)\MSSQLLocalDB;Initial Catalog=PansionDB;Integrated Security=True; TrustServerCertificate=True;");
-        }
-
-        public SqlCommand NapraviKomandu()
-        {
-            SqlCommand komanda = new SqlCommand("", konekcija, transakcija);
-            return komanda;
-        }
+        public SqlCommand NapraviKomandu() => new SqlCommand("", konekcija, transakcija);
 
         public void OtvoriKonekciju()
         {
-            konekcija.Open();
+            var cs = DbUrl.Current;                    // ← uvek čita aktuelan URL
+            if (konekcija.ConnectionString != cs)
+                konekcija.ConnectionString = cs;
+
+            if (konekcija.State != System.Data.ConnectionState.Open)
+                konekcija.Open();
         }
 
         public void ZatvoriKonekciju()
         {
-            if(konekcija != null && konekcija.State != System.Data.ConnectionState.Closed)
-            {
+            if (konekcija != null && konekcija.State != System.Data.ConnectionState.Closed)
                 konekcija.Close();
-            }
         }
 
-        public void ZapocniTransakciju()
-        {
-            transakcija = konekcija.BeginTransaction();
-        }
-        public void Commit()
-        {
-            transakcija.Commit();
-        }
+        public void ZapocniTransakciju() => transakcija = konekcija.BeginTransaction();
+        public void Commit() => transakcija?.Commit();
+        public void Rollback() => transakcija?.Rollback();
 
-        public void Rollback()
-        {
-            transakcija.Rollback();
-        }    
-      
     }
 }
