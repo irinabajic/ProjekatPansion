@@ -48,8 +48,6 @@
             btnDodajKolegu = new Button();
             btnIzmeniKolegu = new Button();
             btnObrisiKolegu = new Button();
-            label5 = new Label();
-            lblIdRadnik = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -185,7 +183,7 @@
             // 
             // btnIzmeni
             // 
-            btnIzmeni.Location = new Point(24, 180);
+            btnIzmeni.Location = new Point(24, 159);
             btnIzmeni.Name = "btnIzmeni";
             btnIzmeni.Size = new Size(185, 23);
             btnIzmeni.TabIndex = 15;
@@ -195,16 +193,16 @@
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources.macaprva;
-            pictureBox1.Location = new Point(-8, 179);
+            pictureBox1.Location = new Point(6, 74);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(216, 309);
+            pictureBox1.Size = new Size(312, 426);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 16;
             pictureBox1.TabStop = false;
             // 
             // btnMojaStrucnaSprema
             // 
-            btnMojaStrucnaSprema.Location = new Point(24, 209);
+            btnMojaStrucnaSprema.Location = new Point(24, 188);
             btnMojaStrucnaSprema.Name = "btnMojaStrucnaSprema";
             btnMojaStrucnaSprema.Size = new Size(185, 23);
             btnMojaStrucnaSprema.TabIndex = 17;
@@ -238,30 +236,11 @@
             btnObrisiKolegu.Text = "Obrisi";
             btnObrisiKolegu.UseVisualStyleBackColor = true;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(24, 147);
-            label5.Name = "label5";
-            label5.Size = new Size(60, 15);
-            label5.TabIndex = 21;
-            label5.Text = "Radnik ID:";
-            // 
-            // lblIdRadnik
-            // 
-            lblIdRadnik.AutoSize = true;
-            lblIdRadnik.Location = new Point(114, 147);
-            lblIdRadnik.Name = "lblIdRadnik";
-            lblIdRadnik.Size = new Size(0, 15);
-            lblIdRadnik.TabIndex = 22;
-            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(lblIdRadnik);
-            Controls.Add(label5);
             Controls.Add(btnObrisiKolegu);
             Controls.Add(btnIzmeniKolegu);
             Controls.Add(btnDodajKolegu);
@@ -313,8 +292,6 @@
         private Button btnDodajKolegu;
         private Button btnIzmeniKolegu;
         private Button btnObrisiKolegu;
-        private Label label5;
-        private Label lblIdRadnik;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblUsername; set => lblUsername = value; }

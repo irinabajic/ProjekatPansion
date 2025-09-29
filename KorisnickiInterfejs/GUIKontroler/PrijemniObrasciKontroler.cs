@@ -1,4 +1,5 @@
 ﻿using Domen;
+using Domen.Dodatno;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,19 +15,20 @@ namespace KorisnickiInterfejs.GUIKontroler
         public void Osvezi(FrmPrijemniObrasci f)
         {
             var lista = Komunikacija.Instance
-                .PosaljiZahtev<List<PrijemniObrazacGrid>>(Operacija.VratiSvePrijemneObrasceGrid)
-                ?? new List<PrijemniObrazacGrid>();
+                 .PosaljiZahtev<System.Collections.Generic.List<PrijemniObrazacGrid>>(
+                     Operacija.VratiSvePrijemneObrasceGrid)
+                 ?? new System.Collections.Generic.List<PrijemniObrazacGrid>();
 
             f.DgvPrijemniObrasci.AutoGenerateColumns = true;
-            f.DgvPrijemniObrasci.Columns.Clear();               // da ne ostanu stare kolone
+            f.DgvPrijemniObrasci.Columns.Clear();
             f.DgvPrijemniObrasci.ReadOnly = true;
             f.DgvPrijemniObrasci.MultiSelect = false;
             f.DgvPrijemniObrasci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
             f.DgvPrijemniObrasci.DataSource = new BindingList<PrijemniObrazacGrid>(lista);
+
             SakrijKolone(f.DgvPrijemniObrasci);
             PostaviNasloveKolona(f.DgvPrijemniObrasci);
-
             SelektujPrviRedAkoPostoji(f.DgvPrijemniObrasci);
         }
 
@@ -34,8 +36,9 @@ namespace KorisnickiInterfejs.GUIKontroler
         {
             var k = f.TxtPretraga.Text?.Trim() ?? "";
             var lista = Komunikacija.Instance
-                .PosaljiZahtev<List<PrijemniObrazacGrid>>(Operacija.PretraziPrijemneObrasceGrid, k)
-                ?? new List<PrijemniObrazacGrid>();
+                .PosaljiZahtev<System.Collections.Generic.List<PrijemniObrazacGrid>>(
+                    Operacija.PretraziPrijemneObrasceGrid, k)
+                ?? new System.Collections.Generic.List<PrijemniObrazacGrid>();
 
             f.DgvPrijemniObrasci.DataSource = new BindingList<PrijemniObrazacGrid>(lista);
             SakrijKolone(f.DgvPrijemniObrasci);
@@ -83,17 +86,24 @@ namespace KorisnickiInterfejs.GUIKontroler
 
         public void Dodaj(FrmPrijemniObrasci f)
         {
-            if (!DateTime.TryParse(f.TxtDatum.Text?.Trim(), out var datum))
-            { MessageBox.Show("Datum nije validan."); return; }
-            if (!int.TryParse(f.TxtIdRadnik.Text?.Trim(), out var idR) || idR <= 0)
-            { MessageBox.Show("IdRadnik mora biti broj > 0."); return; }
-            if (!int.TryParse(f.TxtIdVlasnik.Text?.Trim(), out var idV) || idV <= 0)
-            { MessageBox.Show("IdVlasnik mora biti broj > 0."); return; }
+            try
+            {
+                using var dlg = new FrmPrijemniKreiraj();
+                if (dlg.ShowDialog(f) != DialogResult.OK) return;
 
-            var p = new PrijemniObrazac { Datum = datum, IdRadnik = idR, IdVlasnik = idV };
+                int id = dlg.NoviIdPrijemnog;
+                if (id > 0)
+                {
+                    using var det = new FrmPrijemniAzuriraj(id);
+                    det.ShowDialog(f);
+                }
 
-            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.DodajPrijemniObrazac, p);
-            OcistiPolja(f); Osvezi(f);
+                Osvezi(f);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString(), "Greška u Dodaj", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private static bool TryGetIdFromRow(DataGridViewRow row, out int id)
@@ -124,33 +134,17 @@ namespace KorisnickiInterfejs.GUIKontroler
 
         public void Izmeni(FrmPrijemniObrasci f)
         {
-            //MessageBox.Show(f.DgvPrijemniObrasci.CurrentRow?.DataBoundItem?.GetType().FullName ?? "null");
             if (!TryGetIdFromRow(f.DgvPrijemniObrasci.CurrentRow, out var id))
-            { MessageBox.Show("Izaberi prijemni obrazac."); return; }
+            { MessageBox.Show("Izaberi prijemni obrazac u tabeli."); return; }
 
-            if (!DateTime.TryParse(f.TxtDatum.Text?.Trim(), out var datum))
-            { MessageBox.Show("Datum nije validan."); return; }
-            if (!int.TryParse(f.TxtIdRadnik.Text?.Trim(), out var idR) || idR <= 0)
-            { MessageBox.Show("IdRadnik mora biti broj > 0."); return; }
-            if (!int.TryParse(f.TxtIdVlasnik.Text?.Trim(), out var idV) || idV <= 0)
-            { MessageBox.Show("IdVlasnik mora biti broj > 0."); return; }
-
-            var p = new PrijemniObrazac
+            using (var det = new FrmPrijemniAzuriraj(id))
             {
-                IdPrijemniObrazac = id,
-                Datum = datum,
-                IdRadnik = idR,
-                IdVlasnik = idV
-            };
-
-            try
-            {
-                Komunikacija.Instance.PosaljiZahtev<object>(Operacija.IzmeniPrijemniObrazac, p);
-                MessageBox.Show("Sačuvano.");
-                OcistiPolja(f); Osvezi(f);
+                det.ShowDialog(f);
             }
-            catch (Exception ex) { MessageBox.Show("Izmena nije uspela: " + ex.Message); }
+            Osvezi(f);
         }
+
+        
 
         public void Obrisi(FrmPrijemniObrasci f)
         {
@@ -182,15 +176,6 @@ namespace KorisnickiInterfejs.GUIKontroler
             SakrijMetaKolone(f.DgvPrijemniObrasci);
         }
 
-        public void PopuniDetaljeIzSelektovanog(FrmPrijemniObrasci f)
-        {
-            if (f.DgvPrijemniObrasci.CurrentRow?.DataBoundItem is PrijemniObrazac sel)
-            {
-                f.TxtDatum.Text = sel.Datum.ToString("yyyy-MM-dd");
-                f.TxtIdRadnik.Text = sel.IdRadnik.ToString();
-                f.TxtIdVlasnik.Text = sel.IdVlasnik.ToString();
-            }
-        }
 
         public void PrikaziDetalje(FrmPrijemniObrasci f)
         {
@@ -222,9 +207,7 @@ namespace KorisnickiInterfejs.GUIKontroler
 
         private void OcistiPolja(FrmPrijemniObrasci f)
         {
-            f.TxtDatum.Clear();
-            f.TxtIdRadnik.Clear();
-            f.TxtIdVlasnik.Clear();
+            
             f.TxtPretraga?.Clear();
         }
     }

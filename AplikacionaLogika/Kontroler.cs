@@ -1,4 +1,5 @@
 ﻿using Domen;
+using Domen.Dodatno;
 using SistemskeOperacije;
 
 namespace AplikacionaLogika
@@ -188,6 +189,18 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
+        //Stavke obrasca
+        public void DodajStavkuObrasca(StavkaObrasca stavka)
+        {
+            var so = new DodajStavkuObrascaSO(stavka);
+            so.IzvrsiTemplejt(); 
+        }
+
+        public void ObrisiStavkuObrasca(int idPrijemniObrazac, int rb)
+        {
+            var so = new ObrisiStavkuObrascaSO(idPrijemniObrazac, rb);
+            so.IzvrsiTemplejt();
+        }
 
 
 

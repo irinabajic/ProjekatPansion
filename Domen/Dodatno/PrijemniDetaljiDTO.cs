@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domen
+namespace Domen.Dodatno
 {
     [Serializable]
     public class PrijemniDetaljiDTO

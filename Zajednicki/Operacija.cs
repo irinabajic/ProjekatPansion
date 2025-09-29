@@ -57,6 +57,11 @@
         //Mesto
         VratiSvaMesta,
 
+        //Stavke obrasca
+        DodajStavkuObrasca,
+        ObrisiStavkuObrasca,
+
+
 
         Logout,
         KrajKomunikacije

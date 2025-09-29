@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             dgvPrijemniObrasci = new DataGridView();
-            label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
-            txtDatum = new TextBox();
-            txtIdVlasnik = new TextBox();
-            txtIdRadnik = new TextBox();
             btnOsvezi = new Button();
             btnDodaj = new Button();
             btnIzmeni = new Button();
@@ -53,58 +47,9 @@
             dgvPrijemniObrasci.Size = new Size(440, 216);
             dgvPrijemniObrasci.TabIndex = 0;
             // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(56, 307);
-            label1.Name = "label1";
-            label1.Size = new Size(46, 15);
-            label1.TabIndex = 1;
-            label1.Text = "Datum:";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(56, 343);
-            label2.Name = "label2";
-            label2.Size = new Size(60, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Radnik ID:";
-            label2.Click += label2_Click;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(56, 377);
-            label3.Name = "label3";
-            label3.Size = new Size(61, 15);
-            label3.TabIndex = 3;
-            label3.Text = "Vlasnik ID:";
-            // 
-            // txtDatum
-            // 
-            txtDatum.Location = new Point(170, 304);
-            txtDatum.Name = "txtDatum";
-            txtDatum.Size = new Size(326, 23);
-            txtDatum.TabIndex = 4;
-            // 
-            // txtIdVlasnik
-            // 
-            txtIdVlasnik.Location = new Point(170, 374);
-            txtIdVlasnik.Name = "txtIdVlasnik";
-            txtIdVlasnik.Size = new Size(326, 23);
-            txtIdVlasnik.TabIndex = 5;
-            // 
-            // txtIdRadnik
-            // 
-            txtIdRadnik.Location = new Point(170, 340);
-            txtIdRadnik.Name = "txtIdRadnik";
-            txtIdRadnik.Size = new Size(326, 23);
-            txtIdRadnik.TabIndex = 6;
-            // 
             // btnOsvezi
             // 
-            btnOsvezi.Location = new Point(56, 422);
+            btnOsvezi.Location = new Point(55, 298);
             btnOsvezi.Name = "btnOsvezi";
             btnOsvezi.Size = new Size(75, 23);
             btnOsvezi.TabIndex = 7;
@@ -113,7 +58,7 @@
             // 
             // btnDodaj
             // 
-            btnDodaj.Location = new Point(174, 422);
+            btnDodaj.Location = new Point(173, 298);
             btnDodaj.Name = "btnDodaj";
             btnDodaj.Size = new Size(75, 23);
             btnDodaj.TabIndex = 8;
@@ -122,7 +67,7 @@
             // 
             // btnIzmeni
             // 
-            btnIzmeni.Location = new Point(299, 422);
+            btnIzmeni.Location = new Point(298, 298);
             btnIzmeni.Name = "btnIzmeni";
             btnIzmeni.Size = new Size(75, 23);
             btnIzmeni.TabIndex = 9;
@@ -131,7 +76,7 @@
             // 
             // btnObrisi
             // 
-            btnObrisi.Location = new Point(421, 422);
+            btnObrisi.Location = new Point(420, 298);
             btnObrisi.Name = "btnObrisi";
             btnObrisi.Size = new Size(75, 23);
             btnObrisi.TabIndex = 10;
@@ -167,7 +112,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(588, 496);
+            ClientSize = new Size(588, 363);
             Controls.Add(btnPrikaziDetalje);
             Controls.Add(txtPretraga);
             Controls.Add(btnPretrazi);
@@ -175,12 +120,6 @@
             Controls.Add(btnIzmeni);
             Controls.Add(btnDodaj);
             Controls.Add(btnOsvezi);
-            Controls.Add(txtIdRadnik);
-            Controls.Add(txtIdVlasnik);
-            Controls.Add(txtDatum);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
             Controls.Add(dgvPrijemniObrasci);
             Name = "FrmPrijemniObrasci";
             Text = "FrmPrijemniObrasci";
@@ -192,12 +131,6 @@
         #endregion
 
         private DataGridView dgvPrijemniObrasci;
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private TextBox txtDatum;
-        private TextBox txtIdVlasnik;
-        private TextBox txtIdRadnik;
         private Button btnOsvezi;
         private Button btnDodaj;
         private Button btnIzmeni;
@@ -206,9 +139,6 @@
         private TextBox txtPretraga;
         private Button btnPrikaziDetalje;
 
-        public TextBox TxtDatum { get => txtDatum; set => txtDatum = value; }
-        public TextBox TxtIdVlasnik { get => txtIdVlasnik; set => txtIdVlasnik = value; }
-        public TextBox TxtIdRadnik { get => txtIdRadnik; set => txtIdRadnik = value; }
         public Button BtnOsvezi { get => btnOsvezi; set => btnOsvezi = value; }
         public Button BtnDodaj { get => btnDodaj; set => btnDodaj = value; }
         public Button BtnIzmeni { get => btnIzmeni; set => btnIzmeni = value; }

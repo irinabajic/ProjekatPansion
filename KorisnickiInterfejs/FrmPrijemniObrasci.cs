@@ -18,21 +18,39 @@ namespace KorisnickiInterfejs
         public FrmPrijemniObrasci()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
 
             dgvPrijemniObrasci.AutoGenerateColumns = false;
             dgvPrijemniObrasci.ReadOnly = true;
+            dgvPrijemniObrasci.MultiSelect = false;
             dgvPrijemniObrasci.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-            this.Load += FrmPrijemniObrasci_Load;
+            Load += (s, e) =>
+            {
+                kontroler.Osvezi(this);
+                // opciono: svaki put kad promeniš selekciju možeš pokazati preview, ali nije obavezno
+                // dgvPrijemniObrasci.SelectionChanged += (s2, e2) => kontroler.PopuniDetaljeIzSelektovanog(this);
+            };
+
             btnOsvezi.Click += (s, e) => kontroler.Osvezi(this);
-            btnDodaj.Click += (s, e) => kontroler.Dodaj(this);
-            btnIzmeni.Click += (s, e) => kontroler.Izmeni(this);
-            btnObrisi.Click += (s, e) => kontroler.Obrisi(this);
             btnPretrazi.Click += (s, e) => kontroler.PretraziGrid(this);
-            dgvPrijemniObrasci.CellDoubleClick += (s, e) => kontroler.PopuniDetaljeIzSelektovanog(this);
+
+            // NOVO: sva logika ide u kontroler
+            btnDodaj.CausesValidation = false;
+            btnDodaj.Click += (s, e) => kontroler.Dodaj(this);
+
+            btnIzmeni.Click += (s, e) => kontroler.Izmeni(this);
+
+            btnObrisi.Click += (s, e) => kontroler.Obrisi(this);
             btnPrikaziDetalje.Click += (s, e) => kontroler.PrikaziDetalje(this);
-            DgvPrijemniObrasci.CellDoubleClick += (s, e) => kontroler.PrikaziDetalje(this);
+
+            // NOVO: dvoklik u gridu otvara detalje (ne izmene)
+            dgvPrijemniObrasci.CellDoubleClick += (s, e) =>
+            {
+                if (e.RowIndex >= 0) // ignoriši header
+                    kontroler.PrikaziDetalje(this);
+            };
+
         }
 
 
@@ -40,11 +58,9 @@ namespace KorisnickiInterfejs
         private void FrmPrijemniObrasci_Load(object sender, EventArgs e)
         {
             kontroler.Osvezi(this);
-            dgvPrijemniObrasci.SelectionChanged += (s, ev) => kontroler.PopuniDetaljeIzSelektovanog(this);
+            
         }
 
-        // public wrappere:
-        public DataGridView DgvPrijemni { get => dgvPrijemniObrasci; set => dgvPrijemniObrasci = value; }
         
         private void label2_Click(object sender, EventArgs e)
         {

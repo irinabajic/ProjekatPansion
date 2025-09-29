@@ -26,6 +26,7 @@ namespace KorisnickiInterfejs.GUIKontroler
                 f.DgvStrucneSpreme.DataSource = new BindingList<Domen.StrucnaSprema>(lista);
 
                 SakrijMetaKolone(f.DgvStrucneSpreme);
+                Sakrij(f.DgvStrucneSpreme, "IdStrucnaSprema");
             }
             catch (Exception ex)
             {

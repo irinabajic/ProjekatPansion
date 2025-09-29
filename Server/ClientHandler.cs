@@ -9,6 +9,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Zajednicki;
 
 namespace Server
@@ -395,6 +396,22 @@ namespace Server
                                 {
                                     var lista = AplikacionaLogika.Kontroler.Instance.VratiSvaMesta();
                                     helper.Posalji(new Odgovor { Signal = true, Objekat = lista });
+                                    break;
+                                }
+
+                            //Stavke obrasca
+                            case Operacija.DodajStavkuObrasca:
+                                {
+                                    var s = KomunikacijaHelper.ReadType<Domen.StavkaObrasca>(req.Objekat);
+                                    AplikacionaLogika.Kontroler.Instance.DodajStavkuObrasca(s);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
+                                    break;
+                                }
+                            case Operacija.ObrisiStavkuObrasca:
+                                {
+                                    var key = KomunikacijaHelper.ReadType<Domen.Dodatno.StavkaKey>(req.Objekat);
+                                    AplikacionaLogika.Kontroler.Instance.ObrisiStavkuObrasca(key.IdPrijemniObrazac, key.Rb);
+                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Obrisano." });
                                     break;
                                 }
 

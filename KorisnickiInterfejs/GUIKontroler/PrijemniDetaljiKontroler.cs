@@ -1,4 +1,4 @@
-﻿using Domen;
+﻿using Domen.Dodatno;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,7 +51,6 @@ namespace KorisnickiInterfejs.GUIKontroler
 
             // lepši naslovi kolona
             SetHeader(f.DgvStavke, nameof(StavkaPrijemnogView.Rb), "Redni broj");
-            SetHeader(f.DgvStavke, nameof(StavkaPrijemnogView.StavkaNaziv), "Naziv stavke");
             SetHeader(f.DgvStavke, nameof(StavkaPrijemnogView.StavkaOpis), "Opis");
             SetHeader(f.DgvStavke, nameof(StavkaPrijemnogView.MackaNaziv), "Mačka");
             SetHeader(f.DgvStavke, nameof(StavkaPrijemnogView.MackaRasa), "Rasa");
@@ -65,7 +64,7 @@ namespace KorisnickiInterfejs.GUIKontroler
 
         private static void SakrijMetaKolone(DataGridView dgv)
         {
-            foreach (var c in new[] { "NazivTabele", "KoloneZaInsert", "UbaciVrednosti" })
+            foreach (var c in new[] { "NazivTabele", "KoloneZaInsert", "UbaciVrednosti","StavkaNaziv" })
                 if (dgv.Columns.Contains(c)) dgv.Columns[c].Visible = false;
         }
     }

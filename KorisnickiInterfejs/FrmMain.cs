@@ -104,7 +104,6 @@ namespace KorisnickiInterfejs
             lblImeIPrezime.Text = $"{Session.Session.Instance.PrijavljeniRadnik.Ime}";
             lblUsername.Text = $"{Session.Session.Instance.PrijavljeniRadnik.Username}";
             lblTelefon.Text = Session.Session.Instance.PrijavljeniRadnik.BrojTelefona;
-            lblIdRadnik.Text = $"{Session.Session.Instance.PrijavljeniRadnik.IdRadnik}";
         }
         private void FrmMain_Load(object sender, EventArgs e)
         {

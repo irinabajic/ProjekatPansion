@@ -23,6 +23,7 @@ namespace Server
 
         private void btnPokreni_Click(object sender, EventArgs e)
         {
+            btnUrlBaze.Enabled = false;
             server = new Server();
             server.Pokreni();
 
@@ -44,6 +45,7 @@ namespace Server
 
         private void btnZaustavi_Click(object sender, EventArgs e)
         {
+            btnUrlBaze.Enabled = true; 
             kraj = true;
             try { tmr.Stop(); } catch { }
 

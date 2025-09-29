@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domen
+namespace Domen.Dodatno
 {
     //Read-only domen za poglede
     [Serializable]
@@ -54,7 +54,6 @@ namespace Domen
     {
         public int IdPrijemniObrazac { get; set; }
         public int Rb { get; set; }
-        public string StavkaNaziv { get; set; } = "";
         public string StavkaOpis { get; set; } = "";
         public int IdMacka { get; set; }
         public string MackaNaziv { get; set; } = "";
@@ -69,7 +68,6 @@ namespace Domen
         {
             IdPrijemniObrazac = (int)r["idPrijemniObrazac"],
             Rb = (int)r["rb"],
-            StavkaNaziv = r["StavkaNaziv"] as string ?? "",
             StavkaOpis = r["StavkaOpis"] as string ?? "",
             IdMacka = (int)r["idMacka"],
             MackaNaziv = r["MackaNaziv"] as string ?? "",

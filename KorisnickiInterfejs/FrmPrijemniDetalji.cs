@@ -1,4 +1,4 @@
-﻿using Domen;
+﻿using Domen.Dodatno;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -64,7 +64,6 @@ namespace KorisnickiInterfejs.GUIKontroler
                 if (dgvStavke.Columns.Contains(name)) dgvStavke.Columns[name].HeaderText = header;
             }
             SetHeader(nameof(StavkaPrijemnogView.Rb), "Redni broj");
-            SetHeader(nameof(StavkaPrijemnogView.StavkaNaziv), "Naziv stavke");
             SetHeader(nameof(StavkaPrijemnogView.StavkaOpis), "Opis");
             SetHeader(nameof(StavkaPrijemnogView.MackaNaziv), "Mačka");
             SetHeader(nameof(StavkaPrijemnogView.MackaRasa), "Rasa");
