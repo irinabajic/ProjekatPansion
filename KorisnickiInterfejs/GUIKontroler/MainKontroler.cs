@@ -39,7 +39,7 @@ namespace KorisnickiInterfejs.GUIKontroler
             dgv.DataSource = null;
             dgv.DataSource = kolege;
 
-            SakrijKolone(dgv, "IdRadnik","Password", "Prijavljen", "NazivTabele", "UbaciVrednosti", "KoloneZaInsert");
+            SakrijKolone(dgv, "Password", "Prijavljen", "NazivTabele", "UbaciVrednosti", "KoloneZaInsert");
         }
 
         private void SakrijKolone(DataGridView dgv, params string[] names)

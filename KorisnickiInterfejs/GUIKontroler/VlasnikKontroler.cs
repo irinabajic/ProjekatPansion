@@ -27,7 +27,7 @@ namespace KorisnickiInterfejs.GUIKontroler
 
                 // BindingList forsira kolone i kada je lista prazna
                 f.DgvVlasnici.DataSource = new BindingList<Domen.Vlasnik>(lista);
-                Sakrij(f.DgvVlasnici, "IdVlasnik","IdMesto");
+                Sakrij(f.DgvVlasnici, "IdMesto");
                 SakrijMetaKolone(f.DgvVlasnici);
                 EnsureMestaLoaded();
                 ApplyMestoColumn(f);

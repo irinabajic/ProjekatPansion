@@ -96,9 +96,36 @@ namespace KorisnickiInterfejs.GUIKontroler
             OcistiPolja(f); Osvezi(f);
         }
 
+        private static bool TryGetIdFromRow(DataGridViewRow row, out int id)
+        {
+            id = 0;
+            if (row == null) return false;
+            var item = row.DataBoundItem;
+            if (item == null) return false;
+
+            switch (item)
+            {
+                case PrijemniObrazac po:
+                    id = po.IdPrijemniObrazac; return true;
+
+                case PrijemniObrazacGrid g:
+                    id = g.IdPrijemniObrazac; return true;
+
+                case System.Data.DataRowView drv:
+                    id = Convert.ToInt32(drv["IdPrijemniObrazac"]); return true;
+
+                default:
+                    var prop = item.GetType().GetProperty("IdPrijemniObrazac");
+                    if (prop == null) return false;
+                    id = Convert.ToInt32(prop.GetValue(item));
+                    return true;
+            }
+        }
+
         public void Izmeni(FrmPrijemniObrasci f)
         {
-            if (f.DgvPrijemniObrasci.CurrentRow?.DataBoundItem is not PrijemniObrazac sel)
+            //MessageBox.Show(f.DgvPrijemniObrasci.CurrentRow?.DataBoundItem?.GetType().FullName ?? "null");
+            if (!TryGetIdFromRow(f.DgvPrijemniObrasci.CurrentRow, out var id))
             { MessageBox.Show("Izaberi prijemni obrazac."); return; }
 
             if (!DateTime.TryParse(f.TxtDatum.Text?.Trim(), out var datum))
@@ -110,7 +137,7 @@ namespace KorisnickiInterfejs.GUIKontroler
 
             var p = new PrijemniObrazac
             {
-                IdPrijemniObrazac = sel.IdPrijemniObrazac,
+                IdPrijemniObrazac = id,
                 Datum = datum,
                 IdRadnik = idR,
                 IdVlasnik = idV
@@ -127,11 +154,21 @@ namespace KorisnickiInterfejs.GUIKontroler
 
         public void Obrisi(FrmPrijemniObrasci f)
         {
-            if (f.DgvPrijemniObrasci.CurrentRow?.DataBoundItem is not PrijemniObrazac sel)
+            if (!TryGetIdFromRow(f.DgvPrijemniObrasci.CurrentRow, out var id))
             { MessageBox.Show("Izaberi prijemni obrazac."); return; }
 
-            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.ObrisiPrijemniObrazac, sel.IdPrijemniObrazac);
-            OcistiPolja(f); Osvezi(f);
+            try
+            {
+                Komunikacija.Instance.PosaljiZahtev<object>(Operacija.ObrisiPrijemniObrazac, id);
+                MessageBox.Show("Uspešno obrisano.");
+                OcistiPolja(f);
+                Osvezi(f);
+            }
+            catch (Exception ex)
+            {
+                // Poruka stiže sa servera (npr. FK 547) – samo je prikaži
+                MessageBox.Show(ex.Message, "Brisanje nije moguće", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         public void Pretrazi(FrmPrijemniObrasci f)

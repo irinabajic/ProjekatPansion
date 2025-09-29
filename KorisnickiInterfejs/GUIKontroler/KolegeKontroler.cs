@@ -25,7 +25,7 @@ namespace KorisnickiInterfejs.GUIKontroler
                 f.DgvKolege.AutoGenerateColumns = true;
                 f.DgvKolege.DataSource = new BindingList<Radnik>(lista);
 
-                Sakrij(f.DgvKolege, "IdRadnik", "Password", "NazivTabele", "KoloneZaInsert", "UbaciVrednosti");
+                Sakrij(f.DgvKolege, "Password", "NazivTabele", "KoloneZaInsert", "UbaciVrednosti");
             }
             catch (Exception ex)
             {
@@ -81,7 +81,7 @@ namespace KorisnickiInterfejs.GUIKontroler
                     Komunikacija.Instance.PosaljiZahtev<object>(
                         Operacija.PromeniLozinkuSaVerifikacijom, payload);
 
-                    MessageBox.Show("Lozinka promenjena.");
+                    //MessageBox.Show("Lozinka promenjena.");
                 }
 
                 Osvezi(f);

@@ -48,6 +48,8 @@
             btnDodajKolegu = new Button();
             btnIzmeniKolegu = new Button();
             btnObrisiKolegu = new Button();
+            label5 = new Label();
+            lblIdRadnik = new Label();
             ((System.ComponentModel.ISupportInitialize)dgvKolege).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -126,9 +128,9 @@
             // dgvKolege
             // 
             dgvKolege.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvKolege.Location = new Point(356, 62);
+            dgvKolege.Location = new Point(339, 62);
             dgvKolege.Name = "dgvKolege";
-            dgvKolege.Size = new Size(420, 150);
+            dgvKolege.Size = new Size(437, 150);
             dgvKolege.TabIndex = 9;
             // 
             // btnLogout
@@ -183,7 +185,7 @@
             // 
             // btnIzmeni
             // 
-            btnIzmeni.Location = new Point(24, 154);
+            btnIzmeni.Location = new Point(24, 180);
             btnIzmeni.Name = "btnIzmeni";
             btnIzmeni.Size = new Size(185, 23);
             btnIzmeni.TabIndex = 15;
@@ -202,7 +204,7 @@
             // 
             // btnMojaStrucnaSprema
             // 
-            btnMojaStrucnaSprema.Location = new Point(24, 183);
+            btnMojaStrucnaSprema.Location = new Point(24, 209);
             btnMojaStrucnaSprema.Name = "btnMojaStrucnaSprema";
             btnMojaStrucnaSprema.Size = new Size(185, 23);
             btnMojaStrucnaSprema.TabIndex = 17;
@@ -211,7 +213,7 @@
             // 
             // btnDodajKolegu
             // 
-            btnDodajKolegu.Location = new Point(356, 220);
+            btnDodajKolegu.Location = new Point(338, 220);
             btnDodajKolegu.Name = "btnDodajKolegu";
             btnDodajKolegu.Size = new Size(75, 23);
             btnDodajKolegu.TabIndex = 18;
@@ -220,7 +222,7 @@
             // 
             // btnIzmeniKolegu
             // 
-            btnIzmeniKolegu.Location = new Point(442, 220);
+            btnIzmeniKolegu.Location = new Point(425, 220);
             btnIzmeniKolegu.Name = "btnIzmeniKolegu";
             btnIzmeniKolegu.Size = new Size(75, 23);
             btnIzmeniKolegu.TabIndex = 19;
@@ -236,11 +238,30 @@
             btnObrisiKolegu.Text = "Obrisi";
             btnObrisiKolegu.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(24, 147);
+            label5.Name = "label5";
+            label5.Size = new Size(60, 15);
+            label5.TabIndex = 21;
+            label5.Text = "Radnik ID:";
+            // 
+            // lblIdRadnik
+            // 
+            lblIdRadnik.AutoSize = true;
+            lblIdRadnik.Location = new Point(114, 147);
+            lblIdRadnik.Name = "lblIdRadnik";
+            lblIdRadnik.Size = new Size(0, 15);
+            lblIdRadnik.TabIndex = 22;
+            // 
             // FrmMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblIdRadnik);
+            Controls.Add(label5);
             Controls.Add(btnObrisiKolegu);
             Controls.Add(btnIzmeniKolegu);
             Controls.Add(btnDodajKolegu);
@@ -292,6 +313,8 @@
         private Button btnDodajKolegu;
         private Button btnIzmeniKolegu;
         private Button btnObrisiKolegu;
+        private Label label5;
+        private Label lblIdRadnik;
 
         public Label LblImeIPrezime { get => lblImeIPrezime; set => lblImeIPrezime = value; }
         public Label LblEmail { get => lblUsername; set => lblUsername = value; }

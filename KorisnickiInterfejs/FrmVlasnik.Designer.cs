@@ -72,14 +72,14 @@
             // 
             // txtAdresa
             // 
-            txtAdresa.Location = new Point(173, 386);
+            txtAdresa.Location = new Point(173, 415);
             txtAdresa.Name = "txtAdresa";
             txtAdresa.Size = new Size(310, 23);
             txtAdresa.TabIndex = 3;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(173, 415);
+            txtEmail.Location = new Point(173, 386);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(310, 23);
             txtEmail.TabIndex = 4;
@@ -105,7 +105,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(82, 389);
+            label3.Location = new Point(82, 418);
             label3.Name = "label3";
             label3.Size = new Size(46, 15);
             label3.TabIndex = 8;
@@ -114,7 +114,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(82, 418);
+            label4.Location = new Point(82, 389);
             label4.Name = "label4";
             label4.Size = new Size(44, 15);
             label4.TabIndex = 9;
