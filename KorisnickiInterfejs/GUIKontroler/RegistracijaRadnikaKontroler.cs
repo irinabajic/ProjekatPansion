@@ -44,9 +44,16 @@ namespace KorisnickiInterfejs.GUIKontroler
             };
 
             // poziv serveru
-            var resp = Komunikacija.Instance.PosaljiZahtev<object>(Operacija.RegistrujRadnika, r);
-            MessageBox.Show("Registracija uspešna.");
-            f.DialogResult = DialogResult.OK;
+            try
+            {
+                var resp = Komunikacija.Instance.PosaljiZahtev<object>(Operacija.RegistrujRadnika, r);
+                MessageBox.Show("Registracija uspešna.");
+                f.DialogResult = DialogResult.OK;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Korisnicko ime zauzeto.");
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AplikacionaLogika;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -26,6 +27,12 @@ namespace KorisnickiInterfejs
                 }
                 return instance;
             }
+        }
+
+        public bool Connected => helper != null;         
+        public void EnsureConnected()
+        {
+            if (!Connected) PoveziSe();
         }
 
         private KomunikacijaHelper helper;

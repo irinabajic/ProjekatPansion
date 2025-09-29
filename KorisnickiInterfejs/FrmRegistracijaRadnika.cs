@@ -19,11 +19,37 @@ namespace KorisnickiInterfejs
         {
             InitializeComponent();
 
-            this.StartPosition = FormStartPosition.CenterParent; // da se otvori po sredini
-            btnRegistruj.Click += (s, e) => _ctrl.Registruj(this);
+            this.StartPosition = FormStartPosition.CenterParent;
+
             txtPassword.UseSystemPasswordChar = true;
             txtPotvrda.UseSystemPasswordChar = true;
+
+            // (opciono) probaj da se povežeš čim se forma otvori
+            this.Load += (_, __) =>
+            {
+                try { Komunikacija.Instance.EnsureConnected(); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Server nije dostupan: " + ex.Message);
+                    Close();
+                }
+            };
+
+            // pre registracije obavezno obezbedi konekciju
+            btnRegistruj.Click += (s, e) =>
+            {
+                try { Komunikacija.Instance.EnsureConnected(); }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Ne mogu da uspostavim vezu: " + ex.Message);
+                    return;
+                }
+
+                _ctrl.Registruj(this);
+            };
         }
+
+
 
         private void label5_Click(object sender, EventArgs e)
         {
