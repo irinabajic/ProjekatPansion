@@ -21,6 +21,8 @@ namespace KorisnickiInterfejs
 
             this.StartPosition = FormStartPosition.CenterParent; // da se otvori po sredini
             btnRegistruj.Click += (s, e) => _ctrl.Registruj(this);
+            txtPassword.UseSystemPasswordChar = true;
+            txtPotvrda.UseSystemPasswordChar = true;
         }
 
         private void label5_Click(object sender, EventArgs e)
