@@ -39,7 +39,6 @@
             btnDodaj = new Button();
             label2 = new Label();
             txtBrojSertifikataNovo = new TextBox();
-            btnOsvezi = new Button();
             btnObrisi = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvRSS).BeginInit();
             grpIzmena.SuspendLayout();
@@ -147,15 +146,6 @@
             txtBrojSertifikataNovo.Size = new Size(214, 23);
             txtBrojSertifikataNovo.TabIndex = 0;
             // 
-            // btnOsvezi
-            // 
-            btnOsvezi.Location = new Point(48, 20);
-            btnOsvezi.Name = "btnOsvezi";
-            btnOsvezi.Size = new Size(75, 23);
-            btnOsvezi.TabIndex = 4;
-            btnOsvezi.Text = "Osvezi";
-            btnOsvezi.UseVisualStyleBackColor = true;
-            // 
             // btnObrisi
             // 
             btnObrisi.Location = new Point(330, 20);
@@ -171,7 +161,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(451, 535);
             Controls.Add(btnObrisi);
-            Controls.Add(btnOsvezi);
             Controls.Add(grpDodavanje);
             Controls.Add(grpIzmena);
             Controls.Add(dgvRSS);
@@ -198,7 +187,6 @@
         private Button btnDodaj;
         private Label label2;
         private TextBox txtBrojSertifikataNovo;
-        private Button btnOsvezi;
         private Button btnObrisi;
 
         public DataGridView DgvRSS { get => dgvRSS; set => dgvRSS = value; }
@@ -211,7 +199,6 @@
         public Button BtnDodaj { get => btnDodaj; set => btnDodaj = value; }
         public Label Label2 { get => label2; set => label2 = value; }
         public TextBox TxtBrojSertifikataNovo { get => txtBrojSertifikataNovo; set => txtBrojSertifikataNovo = value; }
-        public Button BtnOsvezi { get => btnOsvezi; set => btnOsvezi = value; }
         public Button BtnObrisi { get => btnObrisi; set => btnObrisi = value; }
         public ComboBox CboStrucnaSprema { get => cboStrucnaSprema; set => cboStrucnaSprema = value; }
     }

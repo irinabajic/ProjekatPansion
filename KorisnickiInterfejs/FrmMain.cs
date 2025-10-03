@@ -14,101 +14,121 @@ namespace KorisnickiInterfejs
     public partial class FrmMain : Form
     {
         private GUIKontroler.MainKontroler kontroler = new GUIKontroler.MainKontroler();
-        private bool _kolegaRowClicked = false;
         private readonly GUIKontroler.KolegeKontroler _kolegeK = new GUIKontroler.KolegeKontroler();
         public FrmMain()
         {
             InitializeComponent();
+            StartPosition = FormStartPosition.CenterScreen;
 
-  
-            this.StartPosition = FormStartPosition.CenterScreen;
-           // this.WindowState   = FormWindowState.Maximized;   // zauzmi ceo ekran (taskbar ostaje)
             dgvKolege.ReadOnly = true;
             dgvKolege.AutoGenerateColumns = true;
             dgvKolege.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvKolege.MultiSelect = false;
+            dgvKolege.AllowUserToAddRows = false;
+
             OsveziMojePodatkeNaEkranu();
 
-            this.Load += (s, e) =>
+            // 🔒 početno stanje
+            btnIzmeniKolegu.Enabled = false;
+            btnObrisiKolegu.Enabled = false;
+
+            // učitaj i očisti selekciju
+            Load += (s, e) =>
             {
                 _kolegeK.Osvezi(this);
-                _kolegaRowClicked = false;
-            };
-            dgvKolege.CellClick += (s, e) =>
-            {
-                if (e.RowIndex >= 0) _kolegaRowClicked = true;
+                DeferClearSelection();
             };
 
-            // Dvoklik = direktno Izmeni
+            // svaki rebind DataSource-a → SSMS auto-selektuje 1. red, pa gasimo
+            dgvKolege.DataBindingComplete += (s, e) => DeferClearSelection();
+
+            // izbor reda → uključi/isključi dugmad
+            dgvKolege.SelectionChanged += (s, e) => UpdateButtonsState();
+
+            // Dvoklik = Izmeni + reset posle
             dgvKolege.CellDoubleClick += (s, e) =>
             {
                 if (e.RowIndex < 0) return;
-                _kolegaRowClicked = true;
                 _kolegeK.Izmeni(this);
-                _kolegaRowClicked = false;
+                AfterCrudReset();
             };
 
-            // DODAJ (samo klik na dugme)
-            btnDodajKolegu.Click += (s, e) => _kolegeK.Dodaj(this);
+            // DODAJ → posle dodavanja reset
+            btnDodajKolegu.Click += (s, e) =>
+            {
+                _kolegeK.Dodaj(this);
+                AfterCrudReset();
+            };
 
-            // IZMENI (mora single-click na red + klik na dugme)
+            // IZMENI → nema više ručnih provera, dugme je disabled dok nema selekcije
             btnIzmeniKolegu.Click += (s, e) =>
             {
-                if (!_kolegaRowClicked || dgvKolege.CurrentRow?.DataBoundItem == null)
-                {
-                    MessageBox.Show("Najpre klikni na kolegu u tabeli, pa 'Izmeni'.");
-                    return;
-                }
                 _kolegeK.Izmeni(this);
-                _kolegaRowClicked = false;
+                AfterCrudReset();
             };
 
-            // OBRIŠI (mora single-click na red + klik na dugme)
+            // OBRIŠI → reset posle
             btnObrisiKolegu.Click += (s, e) =>
             {
-                if (!_kolegaRowClicked || dgvKolege.CurrentRow?.DataBoundItem == null)
-                {
-                    MessageBox.Show("Najpre klikni na kolegu u tabeli, pa 'Obriši'.");
-                    return;
-                }
                 _kolegeK.Obrisi(this);
-                _kolegaRowClicked = false;
+                AfterCrudReset();
             };
 
-
+            // ostalo ostaje kako je
             btnIzmeni.Click += (s, e) =>
             {
                 using var frm = new FrmMojProfil(Session.Session.Instance.PrijavljeniRadnik);
-                if (frm.ShowDialog() == DialogResult.OK)
-                    OsveziMojePodatkeNaEkranu();
+                if (frm.ShowDialog() == DialogResult.OK) OsveziMojePodatkeNaEkranu();
             };
-
 
             btnMojaStrucnaSprema.Click += (s, e) =>
             {
                 if (!Session.Session.Instance.JePrijavljen)
-                {
-                    MessageBox.Show("Prijavi se prvo.");
-                    return;
-                }
+                { MessageBox.Show("Prijavi se prvo."); return; }
 
-                using var frm = new FrmMojaStrucnaSprema();
-                frm.StartPosition = FormStartPosition.CenterParent; // kao i kod profila
+                using var frm = new FrmMojaStrucnaSprema { StartPosition = FormStartPosition.CenterParent };
                 frm.ShowDialog(this);
             };
         }
 
+        private void DeferClearSelection()
+        {
+            // odloženo da pregazimo default selekciju posle bindovanja
+            BeginInvoke(new Action(() =>
+            {
+                dgvKolege.ClearSelection();
+                dgvKolege.CurrentCell = null;
+                btnIzmeniKolegu.Enabled = false;
+                btnObrisiKolegu.Enabled = false;
+            }));
+        }
+
+        private void UpdateButtonsState()
+        {
+            bool has = dgvKolege.CurrentRow != null && dgvKolege.SelectedRows.Count > 0;
+            btnIzmeniKolegu.Enabled = has;
+            btnObrisiKolegu.Enabled = has;
+        }
+
+        private void AfterCrudReset()
+        {
+            _kolegeK.Osvezi(this);
+            DeferClearSelection();
+        }
+
+        // (tvoja postojeća metoda ostaje)
         private void OsveziMojePodatkeNaEkranu()
         {
-            // prilagodi imenima svojih labela:
-            lblImeIPrezime.Text = $"{Session.Session.Instance.PrijavljeniRadnik.Ime}";
-            lblUsername.Text = $"{Session.Session.Instance.PrijavljeniRadnik.Username}";
+            lblImeIPrezime.Text = Session.Session.Instance.PrijavljeniRadnik.Ime;
+            lblUsername.Text = Session.Session.Instance.PrijavljeniRadnik.Username;
             lblTelefon.Text = Session.Session.Instance.PrijavljeniRadnik.BrojTelefona;
         }
+
         private void FrmMain_Load(object sender, EventArgs e)
         {
             kontroler.Init(this);
             kontroler.UcitajKolege(this);
+            DeferClearSelection(); // sigurnosti radi
         }
 
         private void btnLogout_Click(object sender, EventArgs e)

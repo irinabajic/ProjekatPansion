@@ -12,33 +12,78 @@ namespace KorisnickiInterfejs
 {
     public partial class FrmMacke : Form
     {
-        private GUIKontroler.MackeKontroler kontroler = new GUIKontroler.MackeKontroler();
+        private readonly GUIKontroler.MackeKontroler kontroler =
+        new GUIKontroler.MackeKontroler();
 
         public FrmMacke()
         {
             InitializeComponent();
-            this.StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen;
 
             dgvMacke.AutoGenerateColumns = false;
             dgvMacke.ReadOnly = true;
+            dgvMacke.MultiSelect = false;
             dgvMacke.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvMacke.AllowUserToAddRows = false;
 
-            
-            this.Load += FrmMacke_Load;
+            // početno stanje
+            btnIzmeni.Enabled = false;
+            btnObrisi.Enabled = false;
+
+            // 1) učitaj i odmah očisti selekciju
+            Load += (s, e) =>
+            {
+                kontroler.Osvezi(this);
+                DeferClearSelection();
+            };
+
+            // 2) svaki refresh DataSource-a → očisti selekciju
+            dgvMacke.DataBindingComplete += (s, e) => DeferClearSelection();
+
+            // 3) kad korisnik izabere red → popuni polja + uključi dugmad
+            dgvMacke.SelectionChanged += (s, e) => OnSelectionChanged();
+
+            // tvoji postojeći handleri
             btnOsvezi.Click += (s, e) => kontroler.Osvezi(this);
             btnDodaj.Click += (s, e) => kontroler.Dodaj(this);
             btnIzmeni.Click += (s, e) => kontroler.Izmeni(this);
             btnObrisi.Click += (s, e) => kontroler.Obrisi(this);
             btnPretrazi.Click += (s, e) => kontroler.Pretrazi(this);
-            dgvMacke.CellDoubleClick += (s, e) => kontroler.PopuniDetaljeIzSelektovanog(this);
         }
 
-        private void FrmMacke_Load(object sender, EventArgs e)
+        // — helpers —
+
+        private void DeferClearSelection()
         {
-            kontroler.Osvezi(this);
-            dgvMacke.SelectionChanged += (s, ev) => kontroler.PopuniDetaljeIzSelektovanog(this);
+            // posle što DataGridView interno selektuje 1. red
+            BeginInvoke(new Action(() =>
+            {
+                dgvMacke.ClearSelection();
+                dgvMacke.CurrentCell = null;
+                btnIzmeni.Enabled = btnObrisi.Enabled = false;
+                txtNaziv.Clear(); txtRasa.Clear(); txtNapomene.Clear();
+            }));
         }
 
-        
+        private void OnSelectionChanged()
+        {
+            var has = dgvMacke.CurrentRow != null && dgvMacke.SelectedRows.Count > 0;
+
+            btnIzmeni.Enabled = has;
+            btnObrisi.Enabled = has;
+
+            if (has && dgvMacke.CurrentRow.DataBoundItem is Domen.Macka m)
+            {
+                // auto-popuna polja
+                txtNaziv.Text = m.Naziv;
+                txtRasa.Text = m.Rasa;
+                txtNapomene.Text = m.Napomene;
+            }
+            else
+            {
+                txtNaziv.Clear(); txtRasa.Clear(); txtNapomene.Clear();
+            }
+
+        }
     }
 }
