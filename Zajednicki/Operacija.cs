@@ -57,9 +57,7 @@
         //Mesto
         VratiSvaMesta,
 
-        //Stavke obrasca
-        DodajStavkuObrasca,
-        ObrisiStavkuObrasca,
+        
 
 
 

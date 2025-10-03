@@ -104,6 +104,12 @@ namespace AplikacionaLogika
         public int DodajPrijemniObrazac(PrijemniObrazac p)
         { var so = new DodajPrijemniObrazacSO(p); so.IzvrsiTemplejt(); return so.NoviId; }
 
+        public void IzmeniPrijemni(Domen.Dodatno.PrijemniUpdateDTO cmd)
+        {
+            var so = new IzmeniPrijemniObrazacSO(cmd);
+            so.IzvrsiTemplejt();
+        }
+
         public void IzmeniPrijemniObrazac(PrijemniObrazac p)
         { var so = new IzmeniPrijemniObrazacSO(p); so.IzvrsiTemplejt(); }
 
@@ -189,18 +195,7 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
-        //Stavke obrasca
-        public void DodajStavkuObrasca(StavkaObrasca stavka)
-        {
-            var so = new DodajStavkuObrascaSO(stavka);
-            so.IzvrsiTemplejt(); 
-        }
-
-        public void ObrisiStavkuObrasca(int idPrijemniObrazac, int rb)
-        {
-            var so = new ObrisiStavkuObrascaSO(idPrijemniObrazac, rb);
-            so.IzvrsiTemplejt();
-        }
+      
 
 
 

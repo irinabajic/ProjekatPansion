@@ -64,18 +64,24 @@ namespace KorisnickiInterfejs.GUIKontroler
         public void DodajStavku(FrmPrijemniAzuriraj f)
         {
             if (f.CmbMacka.SelectedValue == null ||
-                !int.TryParse(f.CmbMacka.SelectedValue.ToString(), out var idMacka))
+        !int.TryParse(f.CmbMacka.SelectedValue.ToString(), out var idMacka))
             { MessageBox.Show("Izaberi mačku."); return; }
 
-            var s = new StavkaObrasca
+            var nova = new StavkaObrasca
             {
-                IdPrijemniObrazac = _idPO,
-                IdMacka = idMacka,
+                // IdPrijemniObrazac i Rb popunjava server
                 Naziv = "Stavka",
-                Opis = f.TxtNapomena.Text?.Trim() ?? ""
+                Opis = f.TxtNapomena.Text?.Trim() ?? "",
+                IdMacka = idMacka
             };
 
-            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.DodajStavkuObrasca, s);
+            var cmd = new Domen.Dodatno.PrijemniUpdateDTO
+            {
+                IdPrijemniObrazac = _idPO,
+                StavkeZaDodavanje = new List<StavkaObrasca> { nova }
+            };
+
+            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.IzmeniPrijemniObrazac, cmd);
             RefreshGrid(f);
             f.TxtNapomena.Clear();
         }
@@ -85,10 +91,13 @@ namespace KorisnickiInterfejs.GUIKontroler
             if (f.DgvStavke.CurrentRow?.DataBoundItem is not StavkaPrijemnogView sel)
             { MessageBox.Show("Izaberi stavku."); return; }
 
-            Komunikacija.Instance.PosaljiZahtev<object>(
-            Operacija.ObrisiStavkuObrasca,
-            new StavkaKey { IdPrijemniObrazac = _idPO, Rb = sel.Rb });
+            var cmd = new Domen.Dodatno.PrijemniUpdateDTO
+            {
+                IdPrijemniObrazac = _idPO,
+                RedniBrojeviZaBrisanje = new List<int> { sel.Rb }
+            };
 
+            Komunikacija.Instance.PosaljiZahtev<object>(Operacija.IzmeniPrijemniObrazac, cmd);
             RefreshGrid(f);
         }
 

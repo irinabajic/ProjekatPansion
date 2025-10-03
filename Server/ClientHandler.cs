@@ -264,15 +264,29 @@ namespace Server
                                 {
                                     try
                                     {
-                                        var p = KomunikacijaHelper.ReadType<Domen.PrijemniObrazac>(req.Objekat);
-                                        if (p.IdPrijemniObrazac <= 0 || p.IdRadnik <= 0 || p.IdVlasnik <= 0)
-                                            throw new Exception("Sva polja su obavezna (Id, Radnik, Vlasnik).");
+                                        // Ako payload izgleda kao DTO (ima liste), radi preko DTO puta,
+                                        // inače je klasičan header update.
+                                        if (req.Objekat is System.Text.Json.JsonElement je &&
+                                            (je.TryGetProperty("StavkeZaDodavanje", out _) ||
+                                             je.TryGetProperty("RedniBrojeviZaBrisanje", out _)))
+                                        {
+                                            var cmd = KomunikacijaHelper.ReadType<Domen.Dodatno.PrijemniUpdateDTO>(req.Objekat);
+                                            AplikacionaLogika.Kontroler.Instance.IzmeniPrijemni(cmd);
+                                        }
+                                        else
+                                        {
+                                            var p = KomunikacijaHelper.ReadType<Domen.PrijemniObrazac>(req.Objekat);
+                                            if (p.IdPrijemniObrazac <= 0 || p.IdRadnik <= 0 || p.IdVlasnik <= 0)
+                                                throw new Exception("Sva polja su obavezna (Id, Radnik, Vlasnik).");
+                                            AplikacionaLogika.Kontroler.Instance.IzmeniPrijemniObrazac(p);
+                                        }
 
-                                        AplikacionaLogika.Kontroler.Instance.IzmeniPrijemniObrazac(p);
                                         helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
                                     }
                                     catch (Exception ex)
-                                    { helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message }); }
+                                    {
+                                        helper.Posalji(new Odgovor { Signal = false, Poruka = ex.Message });
+                                    }
                                     break;
                                 }
                             case Operacija.ObrisiPrijemniObrazac:
@@ -399,21 +413,7 @@ namespace Server
                                     break;
                                 }
 
-                            //Stavke obrasca
-                            case Operacija.DodajStavkuObrasca:
-                                {
-                                    var s = KomunikacijaHelper.ReadType<Domen.StavkaObrasca>(req.Objekat);
-                                    AplikacionaLogika.Kontroler.Instance.DodajStavkuObrasca(s);
-                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Sačuvano." });
-                                    break;
-                                }
-                            case Operacija.ObrisiStavkuObrasca:
-                                {
-                                    var key = KomunikacijaHelper.ReadType<Domen.Dodatno.StavkaKey>(req.Objekat);
-                                    AplikacionaLogika.Kontroler.Instance.ObrisiStavkuObrasca(key.IdPrijemniObrazac, key.Rb);
-                                    helper.Posalji(new Odgovor { Signal = true, Poruka = "Obrisano." });
-                                    break;
-                                }
+                           
 
                             case Operacija.Logout:
                                 {
