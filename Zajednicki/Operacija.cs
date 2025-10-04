@@ -2,9 +2,9 @@
 {
     public enum Operacija
     {
-        Login,
 
         //Radnik 
+        Login,
         IzmeniRadnika,
         RegistrujRadnika,
         VratiSveRadnike,
@@ -56,10 +56,6 @@
 
         //Mesto
         VratiSvaMesta,
-
-        
-
-
 
         Logout,
         KrajKomunikacije

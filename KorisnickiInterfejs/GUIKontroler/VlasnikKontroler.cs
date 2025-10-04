@@ -78,20 +78,26 @@ namespace KorisnickiInterfejs.GUIKontroler
         public void Dodaj(FrmVlasnik f)
         {
 
+            if (f.CboMesto.SelectedValue == null ||
+                !int.TryParse(f.CboMesto.SelectedValue.ToString(), out var idMesto))
+            {
+                MessageBox.Show("Izaberi mesto.");
+                return;
+            }
             var v = new Vlasnik
             {
                 Ime = f.TxtIme.Text?.Trim() ?? "",
                 BrojTelefona = f.TxtTelefon.Text?.Trim() ?? "",
                 Adresa = f.TxtAdresa.Text?.Trim() ?? "",
                 Email = f.TxtEmail.Text?.Trim() ?? "",
-                IdMesto = (int)f.CboMesto.SelectedValue
+                IdMesto = idMesto
             };
 
             if (string.IsNullOrWhiteSpace(v.Ime) ||
                 string.IsNullOrWhiteSpace(v.BrojTelefona) ||
                 string.IsNullOrWhiteSpace(v.Adresa) ||
                 string.IsNullOrWhiteSpace(v.Email))
-            { MessageBox.Show("Sva polja osim IdMesto već su popunjena? Proveri unos."); return; }
+            { MessageBox.Show("Sva polja su obavezna. Proveri unos."); return; }
 
             Komunikacija.Instance.PosaljiZahtev<object>(Operacija.DodajVlasnika, v);
 
