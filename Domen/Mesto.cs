@@ -12,7 +12,7 @@ namespace Domen
     {
         public int IdMesto { get; set; }
         public string Koordinate { get; set; } = "";
-        public string Naziv { get; set; } = "";   // NOVO
+        public string Naziv { get; set; } = "";   
 
         public string NazivTabele => "Mesto";
         public string KoloneZaInsert => "koordinate,naziv"; // redosled kao u UbaciVrednosti

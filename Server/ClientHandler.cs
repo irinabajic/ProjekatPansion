@@ -480,26 +480,6 @@ namespace Server
             try { socket?.Dispose(); } catch { }
             klijenti.Remove(this);
         }
-        public void Stop()
-        {
-            radi = false; // prekini while u HandleRequest
-
-            // skini prijavljenog iz serverske sesije (ako koristiš sesiju na serveru)
-            try { Session.Instance.Odjavi(); } catch { }
-
-            // opcionalno obavesti klijenta da se veza gasi
-            try { helper?.Posalji(new Odgovor { Signal = true, Poruka = "Kraj" }); } catch { }
-
-            // zatvori mrežu
-            try { helper?.Dispose(); } catch { }
-            try { socket?.Shutdown(SocketShutdown.Both); } catch { }
-            try { socket?.Dispose(); } catch { }
-
-            // ukloni handler iz liste
-            klijenti.Remove(this);
-        }
-
-
     }
 }
 

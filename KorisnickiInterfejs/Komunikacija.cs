@@ -55,28 +55,7 @@ namespace KorisnickiInterfejs
             }
         }
 
-        public void Posalji(object poruka)
-        {
-            if (helper == null) throw new InvalidOperationException("Pozovi Connect() pre slanja.");
-            helper.Posalji(poruka);
-        }
 
-        public T Primi<T>()
-        {
-            if (helper == null) throw new InvalidOperationException("Pozovi Connect() pre prijema.");
-            return helper.Primi<T>();
-        }
-
-        public T PosaljiZahtev<T>(Zahtev zahtev) where T : class
-        {
-            if (helper == null) throw new InvalidOperationException("Pozovi Connect() pre slanja.");
-            helper.Posalji(zahtev);
-            Odgovor odgovor = helper.Primi<Odgovor>();
-            if (!odgovor.Signal) throw new Exception(odgovor.Poruka);
-
-            // KLJUČNA LINIJA:
-            return KomunikacijaHelper.ReadType<T>(odgovor.Objekat);
-        }
 
         public T PosaljiZahtev<T>(Operacija operacija, object objekat = null) where T : class
         {
@@ -145,25 +124,5 @@ namespace KorisnickiInterfejs
             return true;
         }
 
-
-
-        public void ZatvoriKonekciju()
-        {
-            try
-            {
-                if (helper != null)
-                {
-                    Zahtev zahtev = new Zahtev() { Operacija = Operacija.KrajKomunikacije };
-                    helper.Posalji(zahtev); 
-                }
-                socket?.Shutdown(SocketShutdown.Both);
-                socket?.Dispose();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-                throw;
-            }
-        }
     }
 }

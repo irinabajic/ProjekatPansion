@@ -21,7 +21,7 @@ namespace KorisnickiInterfejs.GUIKontroler
 
             _dto = Komunikacija.Instance
                    .PosaljiZahtev<PrijemniDetaljiDTO>(Operacija.VratiDetaljePrijemnogObrasca, _idPO)
-                   ?? new PrijemniDetaljiDTO();
+                   ?? new PrijemniDetaljiDTO(); //vraca
 
             var h = _dto.Header;
             f.LblBroj.Text = h.IdPrijemniObrazac.ToString();

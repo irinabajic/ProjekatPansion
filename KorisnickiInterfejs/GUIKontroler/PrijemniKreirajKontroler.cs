@@ -30,7 +30,7 @@ namespace KorisnickiInterfejs.GUIKontroler
             _vlasnici = Komunikacija.Instance
                          .PosaljiZahtev<List<Vlasnik>>(Operacija.VratiSveVlasnike, null);
             f.CmbVlasnik.DropDownStyle = ComboBoxStyle.DropDownList;
-            f.CmbVlasnik.DisplayMember = "Ime";       // kod tebe je polje Ime = "Ime i prezime"
+            f.CmbVlasnik.DisplayMember = "Ime";     
             f.CmbVlasnik.ValueMember = "IdVlasnik";
             f.CmbVlasnik.DataSource = _vlasnici;
 

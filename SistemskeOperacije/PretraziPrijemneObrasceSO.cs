@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SistemskeOperacije
 {
-    // Pretrazi (po datumu "YYYY-MM-DD" ili po idRadnik/idVlasnik)
+    // Pretrazi (po datumu "YYYY-MM-DD" ili radniku/vlasniku)
     public class PretraziPrijemneObrasceSO : OpstaSO
     {
         private readonly string kriterijum;

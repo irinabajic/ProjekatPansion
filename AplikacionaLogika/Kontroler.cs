@@ -1,6 +1,7 @@
 ﻿using Domen;
 using Domen.Dodatno;
 using SistemskeOperacije;
+using System.ComponentModel;
 
 namespace AplikacionaLogika
 {
@@ -195,9 +196,13 @@ namespace AplikacionaLogika
             return so.Rez;
         }
 
-      
 
-
+        public BindingList<Radnik> VratiSviPrijavljeniRadnik()
+        {
+            var so = new VratiSviPrijavljeniRadnikSO(); // SO: SELECT * FROM Radnik WHERE prijavljen=1
+            so.IzvrsiTemplejt();
+            return new BindingList<Radnik>(so.Rez.ToList());
+        }
 
         public void Logout(int idRadnik)
         {

@@ -19,8 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Zajednicki", "Zajednicki\Za
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AplikacionaLogika", "AplikacionaLogika\AplikacionaLogika.csproj", "{EBF4BEB6-EF6F-4404-933D-79798B77096A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleAppDatabase", "ConsoleAppDatabase\ConsoleAppDatabase.csproj", "{62E9539D-7F52-403B-B786-72AEFCD9540D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{E6C748C4-764E-464A-85AC-7774C77FE1AC}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Desktop\Arhitektura.jpg = ..\..\..\Desktop\Arhitektura.jpg
@@ -64,10 +62,6 @@ Global
 		{EBF4BEB6-EF6F-4404-933D-79798B77096A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBF4BEB6-EF6F-4404-933D-79798B77096A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBF4BEB6-EF6F-4404-933D-79798B77096A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{62E9539D-7F52-403B-B786-72AEFCD9540D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62E9539D-7F52-403B-B786-72AEFCD9540D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62E9539D-7F52-403B-B786-72AEFCD9540D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62E9539D-7F52-403B-B786-72AEFCD9540D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

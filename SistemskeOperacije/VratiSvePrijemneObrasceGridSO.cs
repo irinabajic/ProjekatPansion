@@ -17,25 +17,4 @@ namespace SistemskeOperacije
                                .ToList();
         }
     }
-
-    public class PretraziPrijemneObrasceGridSO : OpstaSO
-    {
-        private readonly string _k;
-        public List<PrijemniObrazacGrid> Rez { get; private set; } = new();
-        public PretraziPrijemneObrasceGridSO(string k) { _k = k ?? ""; }
-
-        protected override void Izvrsi()
-        {
-            string Esc(string s) => (s ?? "").Replace("'", "''");
-            var k = Esc(_k);
-            var where = string.IsNullOrWhiteSpace(k)
-                ? "1=1"
-                : $"VlasnikIme LIKE '%{k}%' OR RadnikIme LIKE '%{k}%' " +
-                  $"OR MestoNaziv LIKE '%{k}%' OR Macke LIKE '%{k}%'";
-            Rez = repozitorijum.Pretrazi(new PrijemniObrazacGrid(), where)
-                               .Cast<PrijemniObrazacGrid>()
-                               .ToList();
-        }
-
-    }
 }

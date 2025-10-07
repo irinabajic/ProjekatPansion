@@ -65,7 +65,7 @@ namespace Server
         {
             try
             {
-                BindingList<Radnik> lista = ServerKontroler.Instance.VratiSviPrijavljeniRadnik();
+                BindingList<Radnik> lista = Kontroler.Instance.VratiSviPrijavljeniRadnik();
                 dgvRadnici.AutoGenerateColumns = true;
                 dgvRadnici.DataSource = null;
                 dgvRadnici.DataSource = lista;
